@@ -1,6 +1,6 @@
 server:
  servlet:
-    context-path: /cobranca-naturaves/api
+    context-path: /gestao-de-cobranca/api
     
 springdoc:
   swagger-ui:

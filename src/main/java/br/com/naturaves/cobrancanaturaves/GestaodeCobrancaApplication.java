@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @RestController
 @RequestMapping("/")
-public class CobrancaNaturavesApplication {
+public class GestaodeCobrancaApplication {
 	@GetMapping
 	public String getHomeTeste() {
-		return "Cobranca Naturaves - API";
+		return "Gestao de Cobranca - API";
 	}
 	public static void main(String[] args) {
-		SpringApplication.run(CobrancaNaturavesApplication.class, args);
+		SpringApplication.run(GestaodeCobrancaApplication.class, args);
 	}
 }
