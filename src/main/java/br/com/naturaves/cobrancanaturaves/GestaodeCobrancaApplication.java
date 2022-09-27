@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/")
 public class GestaodeCobrancaApplication {
+	
 	@GetMapping
 	public String getHomeTeste() {
 		return "Gestao de Cobranca - API";
