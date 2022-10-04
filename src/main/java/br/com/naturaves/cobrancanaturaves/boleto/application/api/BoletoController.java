@@ -3,10 +3,15 @@ package br.com.naturaves.cobrancanaturaves.boleto.application.api;
 import java.util.List;
 import java.util.UUID;
 import javax.validation.Valid;
+
+import br.com.naturaves.cobrancanaturaves.handler.APIException;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.naturaves.cobrancanaturaves.boleto.application.service.BoletoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @Log4j2
@@ -56,5 +61,19 @@ public class BoletoController implements BoletoAPI {
 		log.info("[idCliente]{} - [idBoleto] {}",idCliente, idBoleto);
 		boletoService.alteraBoletoDoClienteComId(idCliente, idBoleto, boletoAlteracaoRequest);
 		log.info("[finaliza] BoletoController - patchBoleto");
+	}
+
+	@Override
+	public List<BoletoResponse> postBoletoAtravesCsv(@RequestParam(value = "arquivo_csv") MultipartFile arquivo) {
+		log.info("[inicia] BoletoController - postBoletoAtravesCsv");
+
+		if (!arquivo.getOriginalFilename().matches("^.*csv$")) {
+			throw APIException.build(HttpStatus.BAD_REQUEST, "Por favor insira um arquivo do tipo csv.");
+		}
+
+		List<BoletoResponse> boletos = boletoService.criaBoletoAtravesCsv(arquivo);
+
+		log.info("[finaliza] BoletoController - postBoletoAtravesCsv");
+		return null;
 	}
 }

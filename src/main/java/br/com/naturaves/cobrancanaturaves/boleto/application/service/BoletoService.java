@@ -9,6 +9,7 @@ import br.com.naturaves.cobrancanaturaves.boleto.application.api.BoletoDetalhado
 import br.com.naturaves.cobrancanaturaves.boleto.application.api.BoletoRequest;
 import br.com.naturaves.cobrancanaturaves.boleto.application.api.BoletoResponse;
 import br.com.naturaves.cobrancanaturaves.boleto.domain.Boleto;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface BoletoService {
 	BoletoResponse criaBoleto(UUID idCliente, @Valid BoletoRequest boletoRequest);
@@ -17,4 +18,5 @@ public interface BoletoService {
 	void deletaBoletoDoClienteComId(UUID idCliente, UUID idBoleto);
 	void alteraBoletoDoClienteComId(UUID idCliente, UUID idBoleto, BoletoAlteracaoRequest boletoAlteracaoRequest);
 	Boleto buscaBoletoComIdBoleto(UUID idBoleto);
+	List<BoletoResponse> criaBoletoAtravesCsv(MultipartFile arquivoCsv);
 }

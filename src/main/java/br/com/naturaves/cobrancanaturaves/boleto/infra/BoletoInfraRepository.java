@@ -25,6 +25,14 @@ public class BoletoInfraRepository implements BoletoRepository {
 	}
 
 	@Override
+	public List<Boleto> salvarBoletos(List<Boleto> boletos) {
+		log.info("[inicia] BoletoInfraRepository - salvarBoletos");
+		List<Boleto> boletosCadastrados = boletoSpringDataJPARepository.saveAll(boletos);
+		log.info("[finaliza] BoletoInfraRepository - salvarBoletos");
+		return boletosCadastrados;
+	}
+
+	@Override
 	public List<Boleto> buscaBoletoDoClienteComId(UUID idCliente) {
 		log.info("[inicia] BoletoInfraRepository - buscaBoletoDoClienteComId");
 		var boleto = boletoSpringDataJPARepository.findByIdClienteComercial(idCliente);
