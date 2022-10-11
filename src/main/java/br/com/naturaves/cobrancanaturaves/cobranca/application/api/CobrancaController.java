@@ -3,6 +3,8 @@ package br.com.naturaves.cobrancanaturaves.cobranca.application.api;
 import java.util.List;
 import java.util.UUID;
 import javax.validation.Valid;
+
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.naturaves.cobrancanaturaves.cobranca.application.service.CobrancaService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,14 @@ public class CobrancaController implements CobrancaAPI {
 		CobrancaResponse cobranca = cobrancaService.criaCobranca(idBoleto,cobrancaRequest);
 		log.info("[finaliza] CobrancaController - postCobranca");
 		return cobranca;
+	}
+
+	@Override
+	public List<CobrancaListResponse> postCobrancas(@RequestBody @Valid CobrancaListRequest cobrancaListRequest) {
+		log.info("[inicia] CobrancaController - postCobrancas");
+		List<CobrancaListResponse> cobrancaListResponse = cobrancaService.criaCobrancas(cobrancaListRequest.getData());
+		log.info("[inicia] CobrancaController - postCobrancas");
+		return cobrancaListResponse;
 	}
 
 	@Override

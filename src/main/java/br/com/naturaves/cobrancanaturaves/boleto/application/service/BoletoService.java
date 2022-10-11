@@ -18,5 +18,4 @@ public interface BoletoService {
 	void deletaBoletoDoClienteComId(UUID idCliente, UUID idBoleto);
 	void alteraBoletoDoClienteComId(UUID idCliente, UUID idBoleto, BoletoAlteracaoRequest boletoAlteracaoRequest);
 	Boleto buscaBoletoComIdBoleto(UUID idBoleto);
-	List<BoletoResponse> criaBoletoAtravesCsv(MultipartFile arquivoCsv);
 }

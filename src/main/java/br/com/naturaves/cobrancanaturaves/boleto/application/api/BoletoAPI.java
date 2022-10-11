@@ -31,8 +31,4 @@ public interface BoletoAPI {
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	void patchBoleto(@PathVariable UUID idCliente,@PathVariable UUID idBoleto,
 			@Valid @RequestBody BoletoAlteracaoRequest boletoAlteracaoRequest);
-
-	@PostMapping(value = "/csv")
-	@ResponseStatus(code = HttpStatus.CREATED)
-	public List<BoletoResponse> postBoletoAtravesCsv(@RequestParam(value = "arquivo_csv") MultipartFile file);
 }

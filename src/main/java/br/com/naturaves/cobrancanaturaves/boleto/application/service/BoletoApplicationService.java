@@ -88,45 +88,4 @@ public class BoletoApplicationService implements BoletoService {
         Boleto boleto = boletoRepository.buscaBoletoPeloId(idBoleto);
         return boleto;
     }
-
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public List<BoletoResponse> criaBoletoAtravesCsv(MultipartFile arquivoCsv) {
-        log.info("[inicia] BoletoApplicationService - criaBoletoAtravesCsv");
-        List<Boleto> boletos = extrairBoletosAtravesCsv(arquivoCsv);
-        //boletoRepository.salvarBoletos(boletos);
-        return null;
-    }
-
-    private List<Boleto> extrairBoletosAtravesCsv(MultipartFile arquivoCsv) {
-        List<Boleto> boletos = new ArrayList<>();
-
-        try {
-            String linha = "";
-            Path tempDir = Files.createTempDirectory("");
-            File tempFile = tempDir.resolve(arquivoCsv.getOriginalFilename()).toFile();
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(tempFile.getAbsolutePath()));
-
-            while ((linha = bufferedReader.readLine()) != null) {
-                String[] dadosDaLinha = linha.split(",");
-
-                UUID idCliente = UUID.fromString(dadosDaLinha[0]);
-
-                BoletoRequest boletoRequest = new BoletoRequest(
-                        dadosDaLinha[1],
-                        dadosDaLinha[2],
-                        LocalDate.parse(dadosDaLinha[3], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                        Double.parseDouble(dadosDaLinha[4]),
-                        GrupoEmpresarial.valueOf(dadosDaLinha[5])
-                );
-
-                boletos.add(new Boleto(idCliente, boletoRequest));
-            }
-
-            return boletos;
-        } catch (IOException e) {
-            throw APIException.build(HttpStatus.BAD_REQUEST, "Error durante a leitura do arquivo.");
-            //e.printStackTrace();
-        }
-    }
 }

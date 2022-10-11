@@ -62,18 +62,4 @@ public class BoletoController implements BoletoAPI {
 		boletoService.alteraBoletoDoClienteComId(idCliente, idBoleto, boletoAlteracaoRequest);
 		log.info("[finaliza] BoletoController - patchBoleto");
 	}
-
-	@Override
-	public List<BoletoResponse> postBoletoAtravesCsv(@RequestParam(value = "arquivo_csv") MultipartFile arquivo) {
-		log.info("[inicia] BoletoController - postBoletoAtravesCsv");
-
-		if (!arquivo.getOriginalFilename().matches("^.*csv$")) {
-			throw APIException.build(HttpStatus.BAD_REQUEST, "Por favor insira um arquivo do tipo csv.");
-		}
-
-		List<BoletoResponse> boletos = boletoService.criaBoletoAtravesCsv(arquivo);
-
-		log.info("[finaliza] BoletoController - postBoletoAtravesCsv");
-		return null;
-	}
 }
