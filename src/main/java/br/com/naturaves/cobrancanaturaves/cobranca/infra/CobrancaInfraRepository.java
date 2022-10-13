@@ -2,6 +2,7 @@ package br.com.naturaves.cobrancanaturaves.cobranca.infra;
 
 import java.util.List;
 import java.util.UUID;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import br.com.naturaves.cobrancanaturaves.cobranca.application.repository.CobrancaRepository;
@@ -22,6 +23,14 @@ public class CobrancaInfraRepository implements CobrancaRepository {
 		Cobranca cobrancaSalva = cobrancaSpringDataJPARepository.save(cobranca);
 		log.info("[finaliza] CobrancaInfraRepository - salvaCobranca");
 		return cobrancaSalva;
+	}
+
+	@Override
+	public List<Cobranca> salvarCobrancas(List<Cobranca> cobrancas) {
+		log.info("[inicia] CobrancaInfraRepository - salvarCobrancas");
+		List<Cobranca> cobrancasCadastradas = cobrancaSpringDataJPARepository.saveAll(cobrancas);
+		log.info("[finaliza] CobrancaInfraRepository - salvarCobrancas");
+		return cobrancasCadastradas;
 	}
 
 	@Override
