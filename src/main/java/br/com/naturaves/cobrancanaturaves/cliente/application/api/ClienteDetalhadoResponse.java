@@ -8,23 +8,23 @@ import lombok.Value;
 
 @Value
 public class ClienteDetalhadoResponse {
-	private UUID idCliente;
-	private String codCliente;
-	private String razaoSocial;
-	private InscricaoSocial inscricaoSocial;
-	private String telefone;
-	private String email;
-	private String vendedor;
-	private LocalDate dataDoCadastro;
+    private UUID idCliente;
+    private String cliente;
+    private String nomeCliente;
+    private InscricaoSocial inscricaoSocial;
+    private String telefone;
+    private String email;
+    private String nomeVendedor;
+    private LocalDate dataDoCadastro;
 
 	public ClienteDetalhadoResponse(Cliente cliente) {
-		this.idCliente = cliente.getIdCliente();
-		this.codCliente = cliente.getCodCliente();
-		this.razaoSocial = cliente.getRazaoSocial();
-		this.inscricaoSocial = cliente.getInscricaoSocial();
-		this.telefone = cliente.getTelefone();
-		this.email = cliente.getEmail();
-		this.vendedor = cliente.getVendedor();
-		this.dataDoCadastro = cliente.getDataDoCadastro();
+	    this.idCliente = cliente.getIdCliente();
+        this.cliente = cliente.getCliente();
+        this.nomeCliente = cliente.getNomeCliente();
+        this.inscricaoSocial = cliente.getInscricaoSocial();
+        this.telefone = cliente.getTelefone();
+        this.email = cliente.getEmail();
+        this.nomeVendedor = cliente.getNomeVendedor();
+        this.dataDoCadastro = cliente.getDataDoCadastro();
 	}
 }

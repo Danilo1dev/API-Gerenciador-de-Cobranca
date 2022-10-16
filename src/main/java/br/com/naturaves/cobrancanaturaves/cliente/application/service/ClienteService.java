@@ -7,10 +7,10 @@ import br.com.naturaves.cobrancanaturaves.cliente.application.api.ClienteAlterac
 import br.com.naturaves.cobrancanaturaves.cliente.application.api.ClienteDetalhadoResponse;
 import br.com.naturaves.cobrancanaturaves.cliente.application.api.ClienteListResponse;
 import br.com.naturaves.cobrancanaturaves.cliente.application.api.ClienteResponse;
-import br.com.naturaves.cobrancanaturaves.cliente.application.api.clienteRequest;
+import br.com.naturaves.cobrancanaturaves.cliente.application.api.ClienteRequest;
 
 public interface ClienteService {
-	ClienteResponse criaCliente(clienteRequest clienteRequest);
+	ClienteResponse criaCliente(ClienteRequest clienteRequest);
 	List<ClienteListResponse> buscaTodosClientes();
 	ClienteDetalhadoResponse buscaClienteAtravesID(UUID idCliente);
 	void deletaClienteAtravesID(UUID idCliente);

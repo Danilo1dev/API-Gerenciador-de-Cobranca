@@ -2,7 +2,6 @@ package br.com.naturaves.cobrancanaturaves.boleto.application.api;
 
 import br.com.naturaves.cobrancanaturaves.boleto.domain.Boleto;
 import lombok.Value;
-
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
