@@ -13,22 +13,13 @@ import java.util.List;
 import java.util.UUID;
 import javax.validation.Valid;
 
-import br.com.naturaves.cobrancanaturaves.boleto.domain.GrupoEmpresarial;
-import br.com.naturaves.cobrancanaturaves.handler.APIException;
-import org.springframework.http.HttpStatus;
+import br.com.naturaves.cobrancanaturaves.boleto.application.api.*;
 import org.springframework.stereotype.Service;
-import br.com.naturaves.cobrancanaturaves.boleto.application.api.BoletoAlteracaoRequest;
-import br.com.naturaves.cobrancanaturaves.boleto.application.api.BoletoClienteListResponse;
-import br.com.naturaves.cobrancanaturaves.boleto.application.api.BoletoDetalhadoResponse;
-import br.com.naturaves.cobrancanaturaves.boleto.application.api.BoletoRequest;
-import br.com.naturaves.cobrancanaturaves.boleto.application.api.BoletoResponse;
 import br.com.naturaves.cobrancanaturaves.boleto.application.repository.BoletoRepository;
 import br.com.naturaves.cobrancanaturaves.boleto.domain.Boleto;
 import br.com.naturaves.cobrancanaturaves.cliente.application.service.ClienteService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @Log4j2
@@ -36,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class BoletoApplicationService implements BoletoService {
     private final ClienteService clienteService;
     private final BoletoRepository boletoRepository;
+    private final ExtrairBoletosAtravesArquivoService extrairBoletosAtravesArquivoService;
 
     @Override
     public BoletoResponse criaBoleto(UUID idCliente, @Valid BoletoRequest boletoRequest) {
@@ -44,6 +36,15 @@ public class BoletoApplicationService implements BoletoService {
         Boleto boleto = boletoRepository.salvaBoleto(new Boleto(idCliente, boletoRequest));
         log.info("[finaliza] BoletoApplicationService - criaBoleto");
         return new BoletoResponse(boleto.getIdBoleto());
+    }
+
+    @Override
+    public List<BoletoListResponse> criaListaBoletos(String boletoCsvRequest) {
+        log.info("[inicia] BoletoApplicationService - criaListaCobrancas");
+        List<Boleto> boletosExtraidosArquivo = extrairBoletosAtravesArquivoService.extrair(boletoCsvRequest);
+        List<Boleto> boletosCadastrados = boletoRepository.salvarListaBoletos(boletosExtraidosArquivo);
+        log.info("[inicia] BoletoApplicationService - criaListaCobrancas");
+        return BoletoListResponse.converte(boletosCadastrados);
     }
 
     @Override

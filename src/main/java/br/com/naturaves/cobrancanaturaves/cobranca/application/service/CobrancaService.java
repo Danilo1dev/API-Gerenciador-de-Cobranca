@@ -8,7 +8,6 @@ import br.com.naturaves.cobrancanaturaves.cobranca.application.api.*;
 
 public interface CobrancaService {
 	CobrancaResponse criaCobranca(UUID idBoleto, @Valid CobrancaRequest cobrancaRequest);
-	List<CobrancaListResponse> criaCobrancas(String cobrancaCsvRequest);
 	List<CobrancaBoletoListResponse> buscaCobrancaDoBoletoComId(UUID idBoleto);
 	CobrancaDetalhadoResponse buscaCobrancaDoBoletoComId(UUID idBoleto, UUID idCobranca);
 	void deletaCobrancaDoBoletoComId(UUID idBoleto, UUID idCobranca);
