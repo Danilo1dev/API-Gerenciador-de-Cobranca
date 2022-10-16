@@ -42,14 +42,14 @@ public class ExtrairBoletosAtravesCsvApplicationService implements ExtrairBoleto
 
                 UUID idBoleto = UUID.fromString(dataLine[0]);
 
-                BoletoRequest boletoRequest = new BoletoRequest(
-                        dataLine[1],
-                        dataLine[2],
-                        LocalDate.parse(dataLine[3], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                        Double.parseDouble(dataLine[4]),
-                        GrupoEmpresarial.valueOf(dataLine[5])
-                );
-                boletos.add(new Boleto(idBoleto, boletoRequest));
+//                BoletoRequest boletoRequest = new BoletoRequest(
+//                        dataLine[1],
+//                        dataLine[2],
+//                        LocalDate.parse(dataLine[3], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+//                        Double.parseDouble(dataLine[4]),
+//                        GrupoEmpresarial.valueOf(dataLine[5])
+//                );
+//                boletos.add(new Boleto(idBoleto, boletoRequest));
             }
             return boletos;
             
