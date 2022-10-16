@@ -15,7 +15,7 @@ public interface BoletoAPI {
 	BoletoResponse postBoleto(@PathVariable UUID idCliente, 
 			@Valid @RequestBody BoletoRequest boletoRequest);
 
-	@PostMapping(path = "/boletos")
+	@PostMapping(path = "/cadastro-boletos")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	List<BoletoListResponse> postBoletos(@RequestBody @Valid BoletoListRequest boletoListRequest);
 	
