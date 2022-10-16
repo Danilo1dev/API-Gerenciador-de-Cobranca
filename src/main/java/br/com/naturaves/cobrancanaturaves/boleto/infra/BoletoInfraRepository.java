@@ -2,6 +2,7 @@ package br.com.naturaves.cobrancanaturaves.boleto.infra;
 
 import java.util.List;
 import java.util.UUID;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import br.com.naturaves.cobrancanaturaves.boleto.application.repository.BoletoRepository;
@@ -9,6 +10,8 @@ import br.com.naturaves.cobrancanaturaves.boleto.domain.Boleto;
 import br.com.naturaves.cobrancanaturaves.handler.APIException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+
+import javax.transaction.Transactional;
 
 @Repository
 @Log4j2
@@ -22,6 +25,19 @@ public class BoletoInfraRepository implements BoletoRepository {
 		boletoSpringDataJPARepository.save(boleto);
 		log.info("[finaliza] BoletoInfraRepository - salvaBoleto");
 		return boleto;
+	}
+
+	@Override
+	@Transactional
+	public List<Boleto> salvarListaBoletos(List<Boleto> boletos) {
+		try {
+			log.info("[inicia] BoletoInfraRepository - salvarListBoletos");
+			List<Boleto> boletosCadastrados = boletoSpringDataJPARepository.saveAll(boletos);
+			log.info("[finaliza] BoletoInfraRepository - salvarListBoletos");
+			return boletosCadastrados;
+		} catch (Exception ex) {
+			throw APIException.build(HttpStatus.BAD_REQUEST, "Error ao cadastrar os boletos");
+		}
 	}
 
 	@Override

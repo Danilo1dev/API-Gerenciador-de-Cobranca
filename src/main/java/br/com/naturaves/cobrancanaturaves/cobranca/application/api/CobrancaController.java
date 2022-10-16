@@ -26,14 +26,6 @@ public class CobrancaController implements CobrancaAPI {
 	}
 
 	@Override
-	public List<CobrancaListResponse> postCobrancas(@RequestBody @Valid CobrancaListRequest cobrancaListRequest) {
-		log.info("[inicia] CobrancaController - postCobrancas");
-		List<CobrancaListResponse> cobrancaListResponse = cobrancaService.criaCobrancas(cobrancaListRequest.getData());
-		log.info("[inicia] CobrancaController - postCobrancas");
-		return cobrancaListResponse;
-	}
-
-	@Override
 	public List<CobrancaBoletoListResponse> getCobrancaDoBoletoComId(UUID idBoleto) {
 		log.info("[inicia] CobrancaController - getCobrancaDoBoletoComId");
 		log.info("[idBoleto]{}",idBoleto);

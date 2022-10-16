@@ -14,10 +14,6 @@ public interface CobrancaAPI {
 	@ResponseStatus(code = HttpStatus.CREATED)
 	CobrancaResponse postCobranca(@PathVariable UUID idBoleto, 
 			@Valid @RequestBody CobrancaRequest cobrancaRequest);
-
-	@PostMapping(path = "/cadastrar-cobrancas")
-	@ResponseStatus(code = HttpStatus.CREATED)
-    List<CobrancaListResponse> postCobrancas(@RequestBody @Valid CobrancaListRequest cobrancaListRequestt);
 	
 	@GetMapping
 	@ResponseStatus(code = HttpStatus.OK)
