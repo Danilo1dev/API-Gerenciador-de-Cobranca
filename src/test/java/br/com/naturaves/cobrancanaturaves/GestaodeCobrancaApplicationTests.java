@@ -9,5 +9,4 @@ class GestaodeCobrancaApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

@@ -39,5 +39,4 @@ public interface CobrancaAPI {
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	void patchCobranca(@PathVariable UUID idBoleto,@PathVariable UUID idCobranca,
 			@Valid @RequestBody CobrancaAlteracaoRequest cobrancaAlteracaoRequest);
-
 }

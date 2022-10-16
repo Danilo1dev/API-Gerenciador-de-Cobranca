@@ -1,13 +1,10 @@
 package br.com.naturaves.cobrancanaturaves.boleto.application.service;
 
-import br.com.naturaves.cobrancanaturaves.cobranca.application.api.CobrancaRequest;
-import br.com.naturaves.cobrancanaturaves.cobranca.domain.Cobranca;
-import br.com.naturaves.cobrancanaturaves.handler.APIException;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -16,8 +13,9 @@ import java.util.List;
 import java.util.UUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import br.com.naturaves.cobrancanaturaves.cobranca.application.api.CobrancaRequest;
-import br.com.naturaves.cobrancanaturaves.cobranca.domain.Cobranca;
+import br.com.naturaves.cobrancanaturaves.boleto.application.api.BoletoRequest;
+import br.com.naturaves.cobrancanaturaves.boleto.domain.Boleto;
+import br.com.naturaves.cobrancanaturaves.boleto.domain.GrupoEmpresarial;
 import br.com.naturaves.cobrancanaturaves.handler.APIException;
 import lombok.extern.log4j.Log4j2;
 
@@ -50,11 +48,10 @@ public class ExtrairBoletosAtravesCsvApplicationService implements ExtrairBoleto
                         Double.parseDouble(dataLine[4]),
                         GrupoEmpresarial.valueOf(dataLine[5])
                 );
-
                 boletos.add(new Boleto(idBoleto, boletoRequest));
             }
-
             return boletos;
+            
         } catch (IOException e) {
             throw APIException.build(HttpStatus.BAD_REQUEST, "Error durante a leitura do arquivo.");
         }

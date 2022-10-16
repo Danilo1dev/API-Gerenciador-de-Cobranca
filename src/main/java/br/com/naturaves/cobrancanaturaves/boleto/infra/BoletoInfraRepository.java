@@ -2,7 +2,6 @@ package br.com.naturaves.cobrancanaturaves.boleto.infra;
 
 import java.util.List;
 import java.util.UUID;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import br.com.naturaves.cobrancanaturaves.boleto.application.repository.BoletoRepository;
@@ -10,7 +9,6 @@ import br.com.naturaves.cobrancanaturaves.boleto.domain.Boleto;
 import br.com.naturaves.cobrancanaturaves.handler.APIException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-
 import javax.transaction.Transactional;
 
 @Repository
