@@ -9,13 +9,13 @@ import lombok.Value;
 
 @Value
 public class ClienteListResponse {
-	private UUID idCliente;
-	private String codCliente;
-	private String razaoSocial;
-	private InscricaoSocial inscricaoSocial;
-	private String telefone;
-	private String email;
-	private String vendedor;
+    private UUID idCliente;
+    private String cliente;
+    private String nomeCliente;
+    private InscricaoSocial inscricaoSocial;
+    private String telefone;
+    private String email;
+    private String nomeVendedor;
 
 	public static List<ClienteListResponse> converte(List<Cliente> clientes) {
 		return clientes.stream()
@@ -23,12 +23,12 @@ public class ClienteListResponse {
 				.collect(Collectors.toList());
 }
 	public ClienteListResponse(Cliente cliente) {
-		this.idCliente = cliente.getIdCliente();
-		this.codCliente = cliente.getCodCliente();
-		this.razaoSocial = cliente.getRazaoSocial();
-		this.inscricaoSocial = cliente.getInscricaoSocial();
-		this.telefone = cliente.getTelefone();
-		this.email = cliente.getEmail();
-		this.vendedor = cliente.getVendedor();
+	    this.idCliente = cliente.getIdCliente();
+        this.cliente = cliente.getCliente();
+        this.nomeCliente = cliente.getNomeCliente();
+        this.inscricaoSocial = cliente.getInscricaoSocial();
+        this.telefone = cliente.getTelefone();
+        this.email = cliente.getEmail();
+        this.nomeVendedor = cliente.getNomeVendedor();
 	}
 }
