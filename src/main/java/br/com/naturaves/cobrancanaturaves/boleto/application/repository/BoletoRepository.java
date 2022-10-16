@@ -6,6 +6,7 @@ import br.com.naturaves.cobrancanaturaves.boleto.domain.Boleto;
 
 public interface BoletoRepository {
 	Boleto salvaBoleto(Boleto boleto);
+	List<Boleto> salvarListaBoletos(List<Boleto> boletos);
 	List<Boleto> buscaBoletoDoClienteComId(UUID idCliente);
 	Boleto buscaBoletoPeloId(UUID idBoleto);
 	void deletaBoletoId(Boleto boleto);

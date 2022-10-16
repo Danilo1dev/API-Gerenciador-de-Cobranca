@@ -22,7 +22,6 @@ import lombok.extern.log4j.Log4j2;
 public class CobrancaApplicationService implements CobrancaService {
 	private final BoletoService boletoService;
 	private final CobrancaRepository cobrancaRepository;
-	private final ExtrairCobrancasAtravesArquivoService extrairCobrancasAtravesArquivoService;
 	
 	@Override
 	public CobrancaResponse criaCobranca(UUID idBoleto, @Valid CobrancaRequest cobrancaRequest) {
@@ -32,15 +31,6 @@ public class CobrancaApplicationService implements CobrancaService {
 		Cobranca cobranca = cobrancaRepository.salvaCobranca(novaCobranca);
 		log.info("[finaliza] CobrancaApplicationService - criaCobranca");
 		return new CobrancaResponse(cobranca.getIdCobranca());
-	}
-
-	@Override
-	public List<CobrancaListResponse> criaCobrancas(String cobrancaCsvRequest) {
-		log.info("[inicia] CobrancaApplicationService - criaCobrancas");
-		List<Cobranca> cobrancas = extrairCobrancasAtravesArquivoService.extrair(cobrancaCsvRequest);
-		cobrancaRepository.salvarCobrancas(cobrancas);
-		log.info("[inicia] CobrancaApplicationService - criaCobrancas");
-		return CobrancaListResponse.converte(cobrancas);
 	}
 
 	@Override

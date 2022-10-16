@@ -3,9 +3,9 @@ package br.com.naturaves.cobrancanaturaves.boleto.application.api;
 import java.util.List;
 import java.util.UUID;
 import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/v1/cliente/{idCliente}/boleto")
@@ -14,6 +14,10 @@ public interface BoletoAPI {
 	@ResponseStatus(code = HttpStatus.CREATED)
 	BoletoResponse postBoleto(@PathVariable UUID idCliente, 
 			@Valid @RequestBody BoletoRequest boletoRequest);
+
+	@PostMapping(path = "/cadastro-boletos")
+	@ResponseStatus(code = HttpStatus.CREATED)
+	List<BoletoListResponse> postBoletos(@RequestBody @Valid BoletoListRequest boletoListRequest);
 	
 	@GetMapping
 	@ResponseStatus(code = HttpStatus.OK)

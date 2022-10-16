@@ -1,10 +1,13 @@
-package br.com.naturaves.cobrancanaturaves.cobranca.application.service;
+package br.com.naturaves.cobrancanaturaves.boleto.application.service;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
+import br.com.naturaves.cobrancanaturaves.cobranca.application.api.CobrancaRequest;
+import br.com.naturaves.cobrancanaturaves.cobranca.domain.Cobranca;
+import br.com.naturaves.cobrancanaturaves.handler.APIException;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+
+import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -20,11 +23,12 @@ import lombok.extern.log4j.Log4j2;
 
 @Service
 @Log4j2
-public class ExtrairCobrancaAtravesCsvApplicationService implements ExtrairCobrancasAtravesArquivoService {
+public class ExtrairBoletosAtravesCsvApplicationService implements ExtrairBoletosAtravesArquivoService {
+
     @Override
-    public List<Cobranca> extrair(String arquivoCodificado) {
+    public List<Boleto> extrair(String arquivoCodificado) {
         try {
-            List<Cobranca> cobrancas = new ArrayList<>();
+            List<Boleto> boletos = new ArrayList<>();
             String line = "";
             byte[] decodedFile = Base64.getDecoder().decode(arquivoCodificado);
 
@@ -39,16 +43,18 @@ public class ExtrairCobrancaAtravesCsvApplicationService implements ExtrairCobra
 
                 UUID idBoleto = UUID.fromString(dataLine[0]);
 
-                CobrancaRequest cobrancaRequest = new CobrancaRequest(
-                        Double.parseDouble(dataLine[1]),
+                BoletoRequest boletoRequest = new BoletoRequest(
+                        dataLine[1],
                         dataLine[2],
-                        LocalDate.parse(dataLine[3], DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                        LocalDate.parse(dataLine[3], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                        Double.parseDouble(dataLine[4]),
+                        GrupoEmpresarial.valueOf(dataLine[5])
                 );
 
-                cobrancas.add(new Cobranca(idBoleto, cobrancaRequest));
+                boletos.add(new Boleto(idBoleto, boletoRequest));
             }
 
-            return cobrancas;
+            return boletos;
         } catch (IOException e) {
             throw APIException.build(HttpStatus.BAD_REQUEST, "Error durante a leitura do arquivo.");
         }
