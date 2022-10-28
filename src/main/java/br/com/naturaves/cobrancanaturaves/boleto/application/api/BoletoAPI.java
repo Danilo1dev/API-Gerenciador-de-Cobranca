@@ -22,6 +22,10 @@ public interface BoletoAPI {
 	@ResponseStatus(code = HttpStatus.OK)
 	List<BoletoClienteListResponse> getBoletoDoClienteComId(@PathVariable UUID idCliente);
 	
+	@GetMapping(value = "/vencimento")
+	@ResponseStatus(code = HttpStatus.OK)
+	List<BoletoClienteListVencidosResponse> getBoletoVencidoNomeVendedor(@RequestParam String nomeVendedor);
+	
 	@GetMapping(value = "/{idBoleto}")
 	@ResponseStatus(code = HttpStatus.OK)
 	BoletoDetalhadoResponse getBoletoAtravesId(@PathVariable UUID idCliente, @PathVariable UUID idBoleto);

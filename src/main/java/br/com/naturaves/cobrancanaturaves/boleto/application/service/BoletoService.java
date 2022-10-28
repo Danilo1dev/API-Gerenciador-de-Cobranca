@@ -10,6 +10,7 @@ public interface BoletoService {
 	BoletoResponse criaBoleto(UUID idCliente, @Valid BoletoRequest boletoRequest);
 	List<BoletoListResponse> criaListaBoletos(String boletoCsvRequest);
 	List<BoletoClienteListResponse> buscaBoletoDoClienteComId(UUID idCliente);
+	List<BoletoClienteListVencidosResponse> getBoletoVencidoNomeVendedor(String nomeVendedor);
 	BoletoDetalhadoResponse buscaBoletoDoClienteComId(UUID idCliente, UUID idBoleto);
 	void deletaBoletoDoClienteComId(UUID idCliente, UUID idBoleto);
 	void alteraBoletoDoClienteComId(UUID idCliente, UUID idBoleto, BoletoAlteracaoRequest boletoAlteracaoRequest);
