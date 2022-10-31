@@ -6,6 +6,8 @@ import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import br.com.naturaves.cobrancanaturaves.cobranca.application.api.CobrancaBoletoListResponse;
+
 @RestController
 @RequestMapping("/v1/cliente/{idCliente}/boleto")
 public interface BoletoAPI {
@@ -34,4 +36,8 @@ public interface BoletoAPI {
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	void patchBoleto(@PathVariable UUID idCliente,@PathVariable UUID idBoleto,
 			@Valid @RequestBody BoletoAlteracaoRequest boletoAlteracaoRequest);
+	
+	@GetMapping(value = "/{idsDeDocumentos}")
+	@ResponseStatus(code = HttpStatus.OK)
+	List<CobrancaBoletoListResponse> buscaListaDeBoletos(@RequestBody List<UUID> idsDeDocumentos);
 }
