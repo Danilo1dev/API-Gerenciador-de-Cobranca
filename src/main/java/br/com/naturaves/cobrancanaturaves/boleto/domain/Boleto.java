@@ -66,4 +66,5 @@ public class Boleto {
         this.grupoEmpresarial = boletoRequest.getGrupoEmpresarial();
         this.dataHoraDoUltimaAlteracao = LocalDateTime.now();
     }
+    
 }
