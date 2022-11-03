@@ -1,5 +1,6 @@
 package br.com.naturaves.cobrancanaturaves.boleto.application.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -18,9 +19,9 @@ public class TituloApplicationService implements TituloService {
 	private final TituloRepository tituloRepository;
 
 	@Override
-	public List<BoletoClienteListVencidosResponse> buscaBoletosVencidosPorNome(String nomeVendedor) {
+	public List<BoletoClienteListVencidosResponse> buscaBoletosVencidosPorNome(String nomeVendedor, LocalDate dataVencimento) {
 		log.info("[inicia] TituloApplicationService - buscaBoletosVencidosPorNome");
-		List<Boleto> boletoVencido = tituloRepository.buscaBoletoVencido(nomeVendedor);
+		List<Boleto> boletoVencido = tituloRepository.buscaBoletoVencido(nomeVendedor, dataVencimento);
 		log.info("[finaliza] TituloApplicationService - buscaBoletosVencidosPorNome");
 		return BoletoClienteListVencidosResponse.converte(boletoVencido);
 	}

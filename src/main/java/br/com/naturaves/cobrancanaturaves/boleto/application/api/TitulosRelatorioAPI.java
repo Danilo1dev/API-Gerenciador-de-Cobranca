@@ -1,5 +1,6 @@
 package br.com.naturaves.cobrancanaturaves.boleto.application.api;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -15,5 +16,5 @@ public interface TitulosRelatorioAPI {
 
 	@GetMapping(value = "/vencimento")
 	@ResponseStatus(code = HttpStatus.OK)
-	List<BoletoClienteListVencidosResponse> getBoletoVencidoPorDataVencimento(@RequestParam(value = "nomeVendedor")String nomeVendedor);
+	List<BoletoClienteListVencidosResponse> getBoletoVencidoPorDataVencimento(@RequestParam(value = "nomeVendedor")String nomeVendedor,@RequestParam ("dataVencimento") LocalDate dataVencimento);
 }
