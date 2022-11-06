@@ -2,13 +2,19 @@ package br.com.naturaves.cobrancanaturaves.boleto.infra;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.jpa.repository.Query;
 
 import br.com.naturaves.cobrancanaturaves.boleto.domain.Boleto;
 
-public interface TituloInfraJpaRepository extends JpaRepository<Boleto, String> {
+public interface TituloInfraJpaRepository extends JpaRepository<Boleto, UUID> {
 
-	List<Boleto> buscaBoletoVencidoPorVendedor(@Param ("nomeVendedor") String nomeVendedor,@Param ("dataVencimento") LocalDate dataVencimento);
+	@Query(value = "SELECT B.DATA_VENCIMENTO"
+			+ " FROM BOLETO B INNER JOIN CLIENTE C ON B.ID_CLIENTE_COMERCIAL = C.ID_CLIENTE "
+			+ " WHERE C.NOME_VENDEDOR = ?1"
+			,nativeQuery=true)
+	List<Boleto> buscaBoletoVencidoPorVendedor(String nomeVendedor,
+		LocalDate dataVencimento);
 }

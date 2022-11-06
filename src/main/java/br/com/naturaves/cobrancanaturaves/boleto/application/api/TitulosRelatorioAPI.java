@@ -16,5 +16,7 @@ public interface TitulosRelatorioAPI {
 
 	@GetMapping(value = "/vencimento")
 	@ResponseStatus(code = HttpStatus.OK)
-	List<BoletoClienteListVencidosResponse> getBoletoVencidoPorDataVencimento(@RequestParam(value = "nomeVendedor")String nomeVendedor,@RequestParam ("dataVencimento") LocalDate dataVencimento);
+	List<BoletoClienteListVencidosResponse> getBoletoVencidoPorDataVencimento(
+			@RequestParam(value = "nomeVendedor") String nomeVendedor,
+			@RequestParam(required = false, value = "dataVencimento") LocalDate dataVencimento);
 }
