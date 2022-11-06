@@ -23,7 +23,15 @@ public class BoletoClienteListVencidosResponse {
 	    private LocalDateTime dataHoraDaCadastro;
 	
 	    public static List<BoletoClienteListVencidosResponse> converte(List<Boleto> boletoVencido) {
-			return boletoVencido
+	    	List<Boleto> boletosFiltrados = boletoVencido.stream().filter(boleto -> {
+	    		boolean igualMaiorQueDoisDias = boleto.getDataVencimento().isAfter(boleto.getDataVencimento().plusDays(2))
+	    				|| boleto.getDataVencimento().isEqual(boleto.getDataVencimento().plusDays(2));
+	    		if (igualMaiorQueDoisDias) return true; 
+	    			return false;
+	    	})
+	    			.collect(Collectors.toList());
+	    				
+			return boletosFiltrados
 					.stream()
 					.map(BoletoClienteListVencidosResponse::new)
 					.collect(Collectors.toList());

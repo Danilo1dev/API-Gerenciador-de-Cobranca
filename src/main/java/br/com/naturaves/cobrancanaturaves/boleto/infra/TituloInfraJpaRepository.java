@@ -11,8 +11,8 @@ import br.com.naturaves.cobrancanaturaves.boleto.domain.Boleto;
 
 public interface TituloInfraJpaRepository extends JpaRepository<Boleto, UUID> {
 
-	@Query(value = "SELECT B.DATA_VENCIMENTO"
-			+ " FROM BOLETO B INNER JOIN CLIENTE C ON B.ID_CLIENTE_COMERCIAL = C.ID_CLIENTE "
+	@Query(value = "SELECT B.*"
+			+ " FROM BOLETO B JOIN CLIENTE C ON B.ID_CLIENTE_COMERCIAL = C.ID_CLIENTE"
 			+ " WHERE C.NOME_VENDEDOR = ?1"
 			,nativeQuery=true)
 	List<Boleto> buscaBoletoVencidoPorVendedor(String nomeVendedor,
