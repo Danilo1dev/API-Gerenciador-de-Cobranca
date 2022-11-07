@@ -2,14 +2,17 @@ package br.com.naturaves.cobrancanaturaves.boleto.infra;
 
 import java.util.List;
 import java.util.UUID;
+
+import javax.transaction.Transactional;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
+
 import br.com.naturaves.cobrancanaturaves.boleto.application.repository.BoletoRepository;
 import br.com.naturaves.cobrancanaturaves.boleto.domain.Boleto;
 import br.com.naturaves.cobrancanaturaves.handler.APIException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import javax.transaction.Transactional;
 
 @Repository
 @Log4j2
@@ -60,5 +63,13 @@ public class BoletoInfraRepository implements BoletoRepository {
 		log.info("[inicia] BoletoInfraRepository - deletaBoletoId");
 		boletoSpringDataJPARepository.delete(boleto);
 		log.info("[finaliza] BoletoInfraRepository - deletaBoletoId");
+	}
+
+	@Override
+	public List<Boleto> buscaBoletoVencido(UUID idCliente) {
+		log.info("[inicia] BoletoInfraRepository - buscaBoletoVencido");
+    	List<Boleto> listaDeBoletosVencidos = boletoSpringDataJPARepository.findByIdClienteComercial(idCliente);
+		log.info("[finaliza] BoletoInfraRepository - buscaBoletoVencido");
+		return listaDeBoletosVencidos;
 	}
 }

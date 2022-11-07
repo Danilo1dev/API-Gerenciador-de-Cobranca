@@ -37,8 +37,8 @@ public interface BoletoAPI {
 	void patchBoleto(@PathVariable UUID idCliente,@PathVariable UUID idBoleto,
 			@Valid @RequestBody BoletoAlteracaoRequest boletoAlteracaoRequest);
 	
-	@GetMapping(value = "/boletos")
+	@GetMapping(value = "/boletosVencidos")
 	@ResponseStatus(code = HttpStatus.OK)
-	List<BoletoClienteListResponse> buscaListaDeBoletos(@PathVariable UUID idCliente);
+	List<BoletoClienteListResponse> buscaBoletoVencido(@PathVariable UUID idCliente);
 	
 }

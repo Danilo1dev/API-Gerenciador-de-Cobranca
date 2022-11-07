@@ -10,4 +10,5 @@ public interface BoletoRepository {
 	List<Boleto> buscaBoletoDoClienteComId(UUID idCliente);
 	Boleto buscaBoletoPeloId(UUID idBoleto);
 	void deletaBoletoId(Boleto boleto);
+	List<Boleto> buscaBoletoVencido(UUID idCliente);
 }

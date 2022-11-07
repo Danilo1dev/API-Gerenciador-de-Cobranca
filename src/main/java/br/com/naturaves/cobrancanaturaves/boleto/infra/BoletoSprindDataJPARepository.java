@@ -8,4 +8,5 @@ import br.com.naturaves.cobrancanaturaves.boleto.domain.Boleto;
 public interface BoletoSprindDataJPARepository extends JpaRepository<Boleto, UUID>{
 	List<Boleto> findByIdClienteComercial(UUID idClienteComercial);
 	List<Boleto> findByIdBoleto(UUID idBoleto);
+	
 }

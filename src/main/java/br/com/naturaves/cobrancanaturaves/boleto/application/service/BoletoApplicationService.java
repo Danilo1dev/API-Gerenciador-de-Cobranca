@@ -84,4 +84,14 @@ public class BoletoApplicationService implements BoletoService {
         Boleto boleto = boletoRepository.buscaBoletoPeloId(idBoleto);
         return boleto;
     }
+
+	@Override
+	public List<BoletoClienteListResponse> buscaBoletoVencido(UUID idCliente) {
+		 log.info("[inicia] BoletoApplicationService - buscaBoletoVencido");
+	        clienteService.buscaClienteAtravesID(idCliente);
+	        List<Boleto> boletoVencidoDoCliente = boletoRepository.buscaBoletoVencido(idCliente);
+	        log.info("[finaliza] BoletoApplicationService - buscaBoletoVencido");
+	        return BoletoClienteListResponse.converte(boletoVencidoDoCliente);
+		
+	}
 }
