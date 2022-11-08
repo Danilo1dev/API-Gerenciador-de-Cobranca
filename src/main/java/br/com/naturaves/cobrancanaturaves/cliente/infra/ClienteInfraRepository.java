@@ -1,6 +1,7 @@
 package br.com.naturaves.cobrancanaturaves.cliente.infra;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
@@ -46,5 +47,14 @@ public class ClienteInfraRepository implements ClienteRepository {
 		log.info("[inicia]ClienteInfraRepository - deletaCliente");
 		clienteSpringDataJPARepository.delete(cliente);
 		log.info("[finaliza]ClienteInfraRepository - deletaCliente");	
+	}
+
+	@Override
+	public Cliente buscaClienteAtravesCliente(String cliente) {
+		log.info("[inicia]ClienteInfraRepository - buscaClienteAtravesCliente");
+		Cliente byCliente = Optional.ofNullable(clienteSpringDataJPARepository.findByCliente(cliente))
+				.orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Cliente não encontrado pelo cliente " + cliente));
+		log.info("[finaliza]ClienteInfraRepository - buscaClienteAtravesCliente");
+		return byCliente;
 	}
 }

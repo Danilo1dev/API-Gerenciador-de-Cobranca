@@ -3,6 +3,9 @@ package br.com.naturaves.cobrancanaturaves.boleto.application.api;
 import java.util.List;
 import java.util.UUID;
 import javax.validation.Valid;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.naturaves.cobrancanaturaves.boleto.application.service.BoletoService;
@@ -25,11 +28,11 @@ public class BoletoController implements BoletoAPI {
 	}
 
 	@Override
-	public List<BoletoListResponse> postBoletos(@RequestBody @Valid BoletoListRequest boletoListRequest) {
+	public ResponseEntity<Void> postBoletos(@RequestBody @Valid BoletoListRequest boletoListRequest) {
 		log.info("[inicia] BoletoController - postBoletos");
-		List<BoletoListResponse> boletoListResponse = boletoService.criaListaBoletos(boletoListRequest.getData());
+		boletoService.criaListaBoletos(boletoListRequest.getData());
 		log.info("[inicia] BoletoController - postBoletos");
-		return boletoListResponse;
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
 	@Override
