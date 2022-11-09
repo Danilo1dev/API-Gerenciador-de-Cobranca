@@ -1,7 +1,9 @@
 package br.com.naturaves.cobrancanaturaves.boleto.infra;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -19,6 +21,7 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 public class BoletoInfraRepository implements BoletoRepository {
 	private final BoletoSprindDataJPARepository boletoSpringDataJPARepository;
+	
 	
 	@Override
 	public Boleto salvaBoleto(Boleto boleto) {
@@ -67,9 +70,26 @@ public class BoletoInfraRepository implements BoletoRepository {
 
 	@Override
 	public List<Boleto> buscaBoletoVencido(UUID idCliente) {
-		log.info("[inicia] BoletoInfraRepository - buscaBoletoVencido");
-    	List<Boleto> listaDeBoletosVencidos = boletoSpringDataJPARepository.findByIdClienteComercial(idCliente);
-		log.info("[finaliza] BoletoInfraRepository - buscaBoletoVencido");
-		return listaDeBoletosVencidos;
+			log.info("[inicia] BoletoInfraRepository - buscaBoletoVencido");
+			List<Boleto> listaDeBoletosVencidos = boletoSpringDataJPARepository.findByIdClienteComercial(idCliente);
+			
+			var boletosVencidos= listaDeBoletosVencidos.stream().filter(boleto -> {
+	            LocalDate dataVencimento = boleto.getDataVencimento().plusDays(2);
+	            LocalDate dataAgora = LocalDate.now();
+	            
+	            boolean boletosMaioresQueDoisDias = dataVencimento.isAfter(dataAgora) ;
+	            boolean boletosIguaisDoisDias= dataVencimento.isEqual(dataAgora) ;
+	            if (boletosMaioresQueDoisDias || boletosIguaisDoisDias) {
+	                return true;
+	            }
+	            return false;
+	        }).collect(Collectors.toList());
+			
+			log.info("[finaliza] BoletoInfraRepository - buscaBoletoVencido");
+			
+			return boletosVencidos;
+			
+			
 	}
 }
+	
