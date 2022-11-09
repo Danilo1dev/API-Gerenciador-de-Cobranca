@@ -1,7 +1,10 @@
 package br.com.naturaves.cobrancanaturaves.boleto.application.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 import javax.validation.Valid;
 import org.springframework.stereotype.Service;
 import br.com.naturaves.cobrancanaturaves.boleto.application.api.BoletoAlteracaoRequest;
@@ -90,8 +93,21 @@ public class BoletoApplicationService implements BoletoService {
 		 log.info("[inicia] BoletoApplicationService - buscaBoletoVencido");
 	        clienteService.buscaClienteAtravesID(idCliente);
 	        List<Boleto> boletoVencidoDoCliente = boletoRepository.buscaBoletoVencido(idCliente);
+	        
+	        var boletosVencidos= boletoVencidoDoCliente.stream().filter(boleto -> {
+	            LocalDate dataVencimento = boleto.getDataVencimento().plusDays(2);
+	            LocalDate dataAgora = LocalDate.now();
+	            
+	            boolean boletosMaioresQueDoisDias = dataVencimento.isAfter(dataAgora) ;
+	            boolean boletosIguaisDoisDias= dataVencimento.isEqual(dataAgora) ;
+	            if (boletosMaioresQueDoisDias || boletosIguaisDoisDias) {
+	                return true;
+	            }
+	            return false;
+	        }).collect(Collectors.toList());
+			
 	        log.info("[finaliza] BoletoApplicationService - buscaBoletoVencido");
-	        return BoletoClienteListResponse.converte(boletoVencidoDoCliente);
+	        return BoletoClienteListResponse.converte(boletosVencidos);
 		
 	}
 }

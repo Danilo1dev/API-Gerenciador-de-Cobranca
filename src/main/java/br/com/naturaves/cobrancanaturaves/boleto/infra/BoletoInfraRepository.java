@@ -72,24 +72,8 @@ public class BoletoInfraRepository implements BoletoRepository {
 	public List<Boleto> buscaBoletoVencido(UUID idCliente) {
 			log.info("[inicia] BoletoInfraRepository - buscaBoletoVencido");
 			List<Boleto> listaDeBoletosVencidos = boletoSpringDataJPARepository.findByIdClienteComercial(idCliente);
-			
-			var boletosVencidos= listaDeBoletosVencidos.stream().filter(boleto -> {
-	            LocalDate dataVencimento = boleto.getDataVencimento().plusDays(2);
-	            LocalDate dataAgora = LocalDate.now();
-	            
-	            boolean boletosMaioresQueDoisDias = dataVencimento.isAfter(dataAgora) ;
-	            boolean boletosIguaisDoisDias= dataVencimento.isEqual(dataAgora) ;
-	            if (boletosMaioresQueDoisDias || boletosIguaisDoisDias) {
-	                return true;
-	            }
-	            return false;
-	        }).collect(Collectors.toList());
-			
 			log.info("[finaliza] BoletoInfraRepository - buscaBoletoVencido");
-			
-			return boletosVencidos;
-			
-			
+			return listaDeBoletosVencidos;
 	}
 }
 	
