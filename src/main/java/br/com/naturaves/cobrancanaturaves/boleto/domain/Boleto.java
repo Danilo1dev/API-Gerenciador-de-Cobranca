@@ -18,7 +18,6 @@ import javax.validation.constraints.Size;
 import br.com.naturaves.cobrancanaturaves.boleto.application.api.BoletoAlteracaoRequest;
 import br.com.naturaves.cobrancanaturaves.boleto.application.api.BoletoRequest;
 import lombok.AccessLevel;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -28,7 +27,7 @@ import lombok.NoArgsConstructor;
 public class Boleto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(columnDefinition = "uuid", updatable = false, unique = true, nullable = false)
+	@Column(columnDefinition = "uuid", name = "idBoleto", unique = true, nullable = false)
 	private UUID idBoleto;
 	@NotNull
 	@Column(columnDefinition = "uuid", nullable = false)

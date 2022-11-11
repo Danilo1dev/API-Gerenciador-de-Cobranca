@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(columnDefinition = "uuid", updatable = false, unique = true, nullable = false)
+	@Column(columnDefinition = "uuid",  updatable = false, unique = true, nullable = false)
 	private UUID idCliente;
 
 	@NotBlank
