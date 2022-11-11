@@ -1,6 +1,5 @@
 package br.com.naturaves.cobrancanaturaves.boleto.application.api;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -17,9 +16,9 @@ public class TitulosRelatorioController implements TitulosRelatorioAPI {
 	private final TituloService tituloService;
 
 	@Override
-	public List<BoletoClienteListVencidosResponse> getBoletoVencidoPorDataVencimento(String nomeVendedor, LocalDate dataVencimento) {
+	public List<BoletoClienteListVencidosResponse> getBoletoVencidoPorDataVencimento(String nomeVendedor) {
 		log.info("[inicia] TitulosRelatorioController - getBoletoVencidoPorDataVencimento");
-		List<BoletoClienteListVencidosResponse> boletoVencido = tituloService.buscaBoletosVencidosPorNome(nomeVendedor, dataVencimento);
+		List<BoletoClienteListVencidosResponse> boletoVencido = tituloService.buscaBoletosVencidosPorNome(nomeVendedor);
 		log.info("[finaliza] TitulosRelatorioController - getBoletoVencidoPorDataVencimento");
 		return boletoVencido;
 	}

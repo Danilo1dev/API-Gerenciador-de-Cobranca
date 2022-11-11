@@ -20,9 +20,9 @@ public class TituloInfraRepository implements TituloRepository {
 	private final TituloInfraJpaRepository tituloInfraJpaRepository;
 
 	@Override
-	public List<Boleto> buscaBoletoVencido(String nomeVendedor, LocalDate dataVencimento) {
+	public List<Boleto> buscaBoletoVencido(String nomeVendedor) {
 		log.info("[start] TituloInfraRepository - buscaBoletoVencido");
-		List<Boleto> boleto = tituloInfraJpaRepository.buscaBoletoVencidoPorVendedor(nomeVendedor, dataVencimento);
+		List<Boleto> boleto = tituloInfraJpaRepository.buscaBoletoVencidoPorVendedor(nomeVendedor);
 		log.info("[finish] TituloInfraRepository - buscaBoletoVencido");
 		return boleto;
 	}

@@ -20,7 +20,11 @@ public class ClienteInfraRepository implements ClienteRepository {
 	@Override
 	public Cliente salva(Cliente cliente) {
 		log.info("[inicia]ClienteInfraRepository - salva");
-		clienteSpringDataJPARepository.save(cliente);
+		try {
+			clienteSpringDataJPARepository.save(cliente);
+		} catch (APIException e) {
+			
+		}
 		log.info("[finaliza]ClienteInfraRepository - salva");
 		return cliente;
 	}
@@ -36,8 +40,8 @@ public class ClienteInfraRepository implements ClienteRepository {
 	@Override
 	public Cliente buscaClienteAtravesId(UUID idCliente) {
 		log.info("[inicia]ClienteInfraRepository - buscaClienteAtravesID");
-		Cliente cliente = clienteSpringDataJPARepository.findById(idCliente)
-                .orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Cliente não encontrado! id= " + idCliente));
+		Cliente cliente = clienteSpringDataJPARepository.findById(idCliente).orElseThrow(
+				() -> APIException.build(HttpStatus.NOT_FOUND, "Cliente não encontrado! id= " + idCliente));
 		log.info("[finaliza]ClienteInfraRepository - buscaClienteAtravesID");
 		return cliente;
 	}
@@ -46,14 +50,14 @@ public class ClienteInfraRepository implements ClienteRepository {
 	public void deletaCliente(Cliente cliente) {
 		log.info("[inicia]ClienteInfraRepository - deletaCliente");
 		clienteSpringDataJPARepository.delete(cliente);
-		log.info("[finaliza]ClienteInfraRepository - deletaCliente");	
+		log.info("[finaliza]ClienteInfraRepository - deletaCliente");
 	}
 
 	@Override
 	public Cliente buscaClienteAtravesCliente(String cliente) {
 		log.info("[inicia]ClienteInfraRepository - buscaClienteAtravesCliente");
-		Cliente byCliente = Optional.ofNullable(clienteSpringDataJPARepository.findByCliente(cliente))
-				.orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Cliente não encontrado pelo cliente " + cliente));
+		Cliente byCliente = Optional.ofNullable(clienteSpringDataJPARepository.findByCliente(cliente)).orElseThrow(
+				() -> APIException.build(HttpStatus.NOT_FOUND, "Cliente não encontrado pelo cliente " + cliente));
 		log.info("[finaliza]ClienteInfraRepository - buscaClienteAtravesCliente");
 		return byCliente;
 	}

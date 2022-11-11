@@ -35,38 +35,39 @@ public class Boleto {
 	@Column(columnDefinition = "uuid", nullable = false)
 	private UUID idClienteComercial;
 	@NotNull
-    @NotBlank(message = "O numero do boleto não pode estar em branco")
-    private String documento;
-    @NotNull
-    @Size(max = 2)
-    private String parcela;
-    @NotNull
-    private LocalDate dataVencimento;
-    @NotNull
-    private BigDecimal saldoDevedor;
-    @Enumerated(EnumType.STRING)
-    private GrupoEmpresarial grupoEmpresarial;
-     
-    private LocalDateTime dataHoraDaCadastro;
-    private LocalDateTime dataHoraDoUltimaAlteracao;
-    
-    public Boleto(UUID idCliente, @Valid BoletoRequest boletoRequest) {
-        this.idClienteComercial = idCliente;
-        this.documento = boletoRequest.getDocumento();
-        this.parcela = boletoRequest.getParcela();
-        this.dataVencimento = boletoRequest.getDataVencimento();
-        this.saldoDevedor = boletoRequest.getSaldoDevedor();
-        this.grupoEmpresarial = boletoRequest.getGrupoEmpresarial();
-        this.dataHoraDaCadastro = LocalDateTime.now();
-    }
+	@NotBlank(message = "O numero do boleto não pode estar em branco")
+	private String documento;
+	private String nomeCliente;
+	@NotNull
+	@Size(max = 2)
+	private String parcela;
+	@NotNull
+	private LocalDate dataVencimento;
+	@NotNull
+	private BigDecimal saldoDevedor;
+	@Enumerated(EnumType.STRING)
+	private GrupoEmpresarial grupoEmpresarial;
 
-    public void altera(BoletoAlteracaoRequest boletoRequest) {
-        this.documento = boletoRequest.getDocumento();
-        this.parcela = boletoRequest.getParcela();
-        this.dataVencimento = boletoRequest.getDataVencimento();
-        this.saldoDevedor = boletoRequest.getSaldoDevedor();
-        this.grupoEmpresarial = boletoRequest.getGrupoEmpresarial();
-        this.dataHoraDoUltimaAlteracao = LocalDateTime.now();
-    }
-    
+	private LocalDateTime dataHoraDaCadastro;
+	private LocalDateTime dataHoraDoUltimaAlteracao;
+
+	public Boleto(UUID idCliente, @Valid BoletoRequest boletoRequest) {
+		this.idClienteComercial = idCliente;
+		this.documento = boletoRequest.getDocumento();
+		this.parcela = boletoRequest.getParcela();
+		this.dataVencimento = boletoRequest.getDataVencimento();
+		this.saldoDevedor = boletoRequest.getSaldoDevedor();
+		this.grupoEmpresarial = boletoRequest.getGrupoEmpresarial();
+		this.dataHoraDaCadastro = LocalDateTime.now();
+	}
+
+	public void altera(BoletoAlteracaoRequest boletoRequest) {
+		this.documento = boletoRequest.getDocumento();
+		this.parcela = boletoRequest.getParcela();
+		this.dataVencimento = boletoRequest.getDataVencimento();
+		this.saldoDevedor = boletoRequest.getSaldoDevedor();
+		this.grupoEmpresarial = boletoRequest.getGrupoEmpresarial();
+		this.dataHoraDoUltimaAlteracao = LocalDateTime.now();
+	}
+
 }

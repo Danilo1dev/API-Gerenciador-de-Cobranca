@@ -15,6 +15,8 @@ import lombok.Value;
 public class BoletoClienteListVencidosResponse {
 
 	private UUID idBoleto;
+	private UUID idClienteComercial;
+	//private String nomeCliente;
 	private String documento;
 	private String parcela;
 	private LocalDate dataVencimento;
@@ -27,13 +29,8 @@ public class BoletoClienteListVencidosResponse {
 			boolean igualMaiorQueDoisDias = boleto.getDataVencimento().plusDays(2).isAfter(LocalDate.now())
 					|| boleto.getDataVencimento().plusDays(2).isEqual(LocalDate.now());
 
-			if (igualMaiorQueDoisDias) {
-				return true;
+			return igualMaiorQueDoisDias;
 
-			} else {
-
-				return false;
-			}
 		}).collect(Collectors.toList());
 
 		return boletosFiltrados.stream().map(BoletoClienteListVencidosResponse::new).collect(Collectors.toList());
@@ -41,6 +38,8 @@ public class BoletoClienteListVencidosResponse {
 
 	public BoletoClienteListVencidosResponse(Boleto boleto) {
 		this.idBoleto = boleto.getIdBoleto();
+		this.idClienteComercial = boleto.getIdClienteComercial();
+		//this.nomeCliente = boleto.getNomeCliente();
 		this.documento = boleto.getDocumento();
 		this.parcela = boleto.getParcela();
 		this.dataVencimento = boleto.getDataVencimento();

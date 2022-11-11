@@ -13,6 +13,10 @@ import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import org.aspectj.bridge.Message;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
 import br.com.naturaves.cobrancanaturaves.cliente.application.api.ClienteAlteracaoRequest;
 import br.com.naturaves.cobrancanaturaves.cliente.application.api.ClienteRequest;
 import lombok.AccessLevel;
@@ -25,45 +29,44 @@ import lombok.NoArgsConstructor;
 public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(columnDefinition = "uuid",  updatable = false, unique = true, nullable = false)
+	@Column(columnDefinition = "uuid", updatable = false, unique = true, nullable = false)
 	private UUID idCliente;
 
 	@NotBlank
-    @Column(unique = true)
-    private String cliente;
-    @NotBlank
-    @Column(unique = true)
-    private String nomeCliente;
-    @Enumerated(EnumType.STRING)
-    private InscricaoSocial inscricaoSocial;
-    private String telefone;
-    @Email
-    private String email;
-    @NotBlank
-    private String nomeVendedor;
-    @NotNull
-    private LocalDate dataDoCadastro;
+	@Column(unique = true)
+	private String cliente;
+	@NotBlank
+	@Column(unique = true)
+	private String nomeCliente;
+	@Enumerated(EnumType.STRING)
+	private InscricaoSocial inscricaoSocial;
+	private String telefone;
+	@Email
+	private String email;
+	@NotBlank
+	private String nomeVendedor;
+	@NotNull
+	private LocalDate dataDoCadastro;
 
-    private LocalDateTime dataHoraDaCadastro;
-    private LocalDateTime dataHoraDoUltimaAlteracao;
+	private LocalDateTime dataHoraDaCadastro;
+	private LocalDateTime dataHoraDoUltimaAlteracao;
 
-    public Cliente(ClienteRequest clienteRequest) {
-        this.cliente = clienteRequest.getCliente();
-        this.nomeCliente = clienteRequest.getNomeCliente();
-        this.inscricaoSocial = clienteRequest.getInscricaoSocial();
-        this.telefone = clienteRequest.getTelefone();
-        this.email = clienteRequest.getEmail();
-        this.nomeVendedor = clienteRequest.getNomeVendedor();
-        this.dataDoCadastro = clienteRequest.getDataDoCadastro();
-        this.dataHoraDaCadastro = LocalDateTime.now();
-    }
+	public Cliente(ClienteRequest clienteRequest) {
+		this.cliente = clienteRequest.getCliente();
+		this.nomeCliente = clienteRequest.getNomeCliente();
+		this.inscricaoSocial = clienteRequest.getInscricaoSocial();
+		this.telefone = clienteRequest.getTelefone();
+		this.email = clienteRequest.getEmail();
+		this.nomeVendedor = clienteRequest.getNomeVendedor();
+		this.dataDoCadastro = clienteRequest.getDataDoCadastro();
+		this.dataHoraDaCadastro = LocalDateTime.now();
+	}
 
-    public void altera(ClienteAlteracaoRequest clienteAlteracaoRequest) {
-        this.inscricaoSocial = clienteAlteracaoRequest.getInscricaoSocial();
-        this.telefone = clienteAlteracaoRequest.getTelefone();
-        this.email = clienteAlteracaoRequest.getEmail();
-        this.nomeVendedor = clienteAlteracaoRequest.getNomeVendedor();
-        this.dataHoraDoUltimaAlteracao = LocalDateTime.now();
-    }
+	public void altera(ClienteAlteracaoRequest clienteAlteracaoRequest) {
+		this.inscricaoSocial = clienteAlteracaoRequest.getInscricaoSocial();
+		this.telefone = clienteAlteracaoRequest.getTelefone();
+		this.email = clienteAlteracaoRequest.getEmail();
+		this.nomeVendedor = clienteAlteracaoRequest.getNomeVendedor();
+		this.dataHoraDoUltimaAlteracao = LocalDateTime.now();
+	}
 }
-
