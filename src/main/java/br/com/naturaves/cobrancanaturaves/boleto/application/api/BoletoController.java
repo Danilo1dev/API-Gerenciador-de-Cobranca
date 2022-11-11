@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,25 +23,25 @@ public class BoletoController implements BoletoAPI {
 	@Override
 	public BoletoResponse postBoleto(UUID idCliente, @Valid BoletoRequest boletoRequest) {
 		log.info("[inicia] BoletoController - postBoleto");
-		log.info("[idCliente]{}",idCliente);
-		BoletoResponse boleto = boletoService.criaBoleto(idCliente,boletoRequest);
+		log.info("[idCliente]{}", idCliente);
+		BoletoResponse boleto = boletoService.criaBoleto(idCliente, boletoRequest);
 		log.info("[finaliza] BoletoController - postBoleto");
 		return boleto;
 	}
 
 	@Override
-	public List<BoletoListResponse> postBoletos(@RequestBody @Valid BoletoListRequest boletoListRequest) {
+	public ResponseEntity<Void> postBoletos(@RequestBody @Valid BoletoListRequest boletoListRequest) {
 		log.info("[inicia] BoletoController - postBoletos");
-		List<BoletoListResponse> boletoListResponse = boletoService.criaListaBoletos(boletoListRequest.getData());
+		boletoService.criaListaBoletos(boletoListRequest.getData());
 		log.info("[inicia] BoletoController - postBoletos");
-		return boletoListResponse;
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
 	@Override
 	public List<BoletoClienteListResponse> getBoletoDoClienteComId(UUID idCliente) {
 		log.info("[inicia] BoletoController - getBoletoDoClienteComId");
-		log.info("[idCliente]{}",idCliente);
-		List<BoletoClienteListResponse>boletoDoCliente = boletoService.buscaBoletoDoClienteComId(idCliente);
+		log.info("[idCliente]{}", idCliente);
+		List<BoletoClienteListResponse> boletoDoCliente = boletoService.buscaBoletoDoClienteComId(idCliente);
 		log.info("[finaliza] BoletoController - getBoletoDoClienteComId");
 		return boletoDoCliente;
 	}
@@ -47,7 +49,7 @@ public class BoletoController implements BoletoAPI {
 	@Override
 	public BoletoDetalhadoResponse getBoletoAtravesId(UUID idCliente, UUID idBoleto) {
 		log.info("[inicia] BoletoController - getBoletoAtravesId");
-		log.info("[idCliente]{} - [idBoleto] {}",idCliente, idBoleto);
+		log.info("[idCliente]{} - [idBoleto] {}", idCliente, idBoleto);
 		BoletoDetalhadoResponse boleto = boletoService.buscaBoletoDoClienteComId(idCliente, idBoleto);
 		log.info("[finaliza] BoletoController - getBoletoAtravesId");
 		return boleto;
@@ -56,16 +58,15 @@ public class BoletoController implements BoletoAPI {
 	@Override
 	public void deletaBoletoDoClienteComId(UUID idCliente, UUID idBoleto) {
 		log.info("[inicia] BoletoController - deletaBoletoAtravesId");
-		log.info("[idCliente]{} - [idBoleto] {}",idCliente, idBoleto);
+		log.info("[idCliente]{} - [idBoleto] {}", idCliente, idBoleto);
 		boletoService.deletaBoletoDoClienteComId(idCliente, idBoleto);
-		log.info("[finaliza] BoletoController - deletaBoletoAtravesId");	
+		log.info("[finaliza] BoletoController - deletaBoletoAtravesId");
 	}
 
 	@Override
-	public void patchBoleto(UUID idCliente, UUID idBoleto,
-			@Valid BoletoAlteracaoRequest boletoAlteracaoRequest) {
+	public void patchBoleto(UUID idCliente, UUID idBoleto, @Valid BoletoAlteracaoRequest boletoAlteracaoRequest) {
 		log.info("[inicia] BoletoController - patchBoleto");
-		log.info("[idCliente]{} - [idBoleto] {}",idCliente, idBoleto);
+		log.info("[idCliente]{} - [idBoleto] {}", idCliente, idBoleto);
 		boletoService.alteraBoletoDoClienteComId(idCliente, idBoleto, boletoAlteracaoRequest);
 		log.info("[finaliza] BoletoController - patchBoleto");
 	}
@@ -78,6 +79,4 @@ public class BoletoController implements BoletoAPI {
 		log.info("[finaliza] BoletoController - buscaListaDeBoletos");
 		return boletosVencidos;
 	}
-
-	
 }

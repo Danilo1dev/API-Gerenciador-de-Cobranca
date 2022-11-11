@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(columnDefinition = "uuid", name = "idCliente", updatable = false, unique = true, nullable = false)
+	@Column(columnDefinition = "uuid",  updatable = false, unique = true, nullable = false)
 	private UUID idCliente;
 
 	@NotBlank
@@ -36,7 +36,6 @@ public class Cliente {
     private String nomeCliente;
     @Enumerated(EnumType.STRING)
     private InscricaoSocial inscricaoSocial;
-    @NotBlank
     private String telefone;
     @Email
     private String email;
