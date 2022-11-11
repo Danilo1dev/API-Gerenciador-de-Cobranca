@@ -95,14 +95,15 @@ public class BoletoApplicationService implements BoletoService {
 	        List<Boleto> boletoVencidoDoCliente = boletoRepository.buscaBoletoVencido(idCliente);
 	        
 	        var boletosVencidos= boletoVencidoDoCliente.stream().filter(boleto -> {
-	            LocalDate dataVencimento = boleto.getDataVencimento().plusDays(2);
+	            LocalDate dataVencimento = boleto.getDataVencimento();
 	            LocalDate dataAgora = LocalDate.now();
 	            
-	            boolean boletosMaioresQueDoisDias = dataVencimento.isAfter(dataAgora) ;
-	            boolean boletosIguaisDoisDias= dataVencimento.isEqual(dataAgora) ;
-	            if (boletosMaioresQueDoisDias || boletosIguaisDoisDias) {
+	            boolean boletosVencidosMaisDeDoisDias= dataVencimento.isBefore(dataAgora.plusDays(-1));
+	            boolean boletosIguaisDoisDias= dataVencimento.plusDays(2).isEqual(dataAgora);
+	            if (boletosIguaisDoisDias || boletosVencidosMaisDeDoisDias) {
 	                return true;
 	            }
+	            
 	            return false;
 	        }).collect(Collectors.toList());
 			
