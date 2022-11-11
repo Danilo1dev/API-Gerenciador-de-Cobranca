@@ -9,17 +9,16 @@ import lombok.Value;
 
 @Value
 public class ClienteRequest {
-    @NotBlank
-    private String cliente;
-    @NotBlank
-    private String nomeCliente;
-    private InscricaoSocial inscricaoSocial;
-
-    private String telefone;
-    @Email
-    private String email;
-    @NotBlank
-    private String nomeVendedor;
-    @NotNull
-    private LocalDate dataDoCadastro;
+	@NotBlank
+	private String cliente;
+	@NotBlank
+	private String nomeCliente;
+	private InscricaoSocial inscricaoSocial;
+	private String telefone;
+	@Email
+	private String email;
+	@NotBlank
+	private String nomeVendedor;
+	@NotNull
+	private LocalDate dataDoCadastro;
 }
