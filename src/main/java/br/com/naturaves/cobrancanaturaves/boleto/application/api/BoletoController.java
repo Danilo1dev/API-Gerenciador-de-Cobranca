@@ -71,4 +71,12 @@ public class BoletoController implements BoletoAPI {
 		log.info("[finaliza] BoletoController - patchBoleto");
 	}
 
+	@Override
+	public List<BoletoClienteListResponse> buscaBoletoVencido(UUID idCliente) {
+		log.info("[inicia] BoletoController - buscaListaDeBoletos");
+		log.info("[idCliente]{}",idCliente );
+		List<BoletoClienteListResponse> boletosVencidos = boletoService.buscaBoletoVencido(idCliente);
+		log.info("[finaliza] BoletoController - buscaListaDeBoletos");
+		return boletosVencidos;
+	}
 }

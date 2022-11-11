@@ -37,6 +37,7 @@ public class ClienteController implements ClienteAPI {
 		ClienteDetalhadoResponse clienteDetalhado = clienteService.buscaClienteAtravesID(idCliente);
 		log.info("[finaliza] ClienteController - getClienteAtravesID");		
 		return clienteDetalhado;
+	
 	}
 
 	@Override
