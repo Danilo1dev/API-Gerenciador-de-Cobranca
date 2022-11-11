@@ -30,7 +30,7 @@ public class Boleto {
 	@Column(columnDefinition = "uuid", name = "idBoleto", unique = true, nullable = false)
 	private UUID idBoleto;
 	@NotNull
-	@Column(columnDefinition = "uuid", name = "idClienteComercial", nullable = false)
+	@Column(columnDefinition = "uuid", nullable = false)
 	private UUID idClienteComercial;
 	@NotNull
     @NotBlank(message = "O numero do boleto não pode estar em branco")

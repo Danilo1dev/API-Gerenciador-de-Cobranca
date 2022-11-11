@@ -15,7 +15,7 @@ import br.com.naturaves.cobrancanaturaves.boleto.domain.Boleto;
 
 public interface BoletoService {
 	BoletoResponse criaBoleto(UUID idCliente, @Valid BoletoRequest boletoRequest);
-	List<BoletoListResponse> criaListaBoletos(String boletoCsvRequest);
+	void criaListaBoletos(String boletoCsvRequest);
 	List<BoletoClienteListResponse> buscaBoletoDoClienteComId(UUID idCliente);
 	BoletoDetalhadoResponse buscaBoletoDoClienteComId(UUID idCliente, UUID idBoleto);
 	void deletaBoletoDoClienteComId(UUID idCliente, UUID idBoleto);

@@ -14,7 +14,7 @@ public class ClienteRequest {
     @NotBlank
     private String nomeCliente;
     private InscricaoSocial inscricaoSocial;
-    @NotBlank
+
     private String telefone;
     @Email
     private String email;

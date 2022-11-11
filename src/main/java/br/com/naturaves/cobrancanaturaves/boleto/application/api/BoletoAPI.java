@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -25,8 +26,8 @@ public interface BoletoAPI {
 
 	@PostMapping(path = "/cadastro-boletos")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	List<BoletoListResponse> postBoletos(@RequestBody @Valid BoletoListRequest boletoListRequest);
-
+	ResponseEntity<Void> postBoletos(@RequestBody @Valid BoletoListRequest boletoListRequest);
+	
 	@GetMapping
 	@ResponseStatus(code = HttpStatus.OK)
 	List<BoletoClienteListResponse> getBoletoDoClienteComId(@PathVariable UUID idCliente);

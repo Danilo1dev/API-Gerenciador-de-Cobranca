@@ -36,7 +36,6 @@ public class Cliente {
     private String nomeCliente;
     @Enumerated(EnumType.STRING)
     private InscricaoSocial inscricaoSocial;
-    @NotBlank
     private String telefone;
     @Email
     private String email;
