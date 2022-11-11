@@ -16,7 +16,6 @@ public class BoletoClienteListVencidosResponse {
 
 	private UUID idBoleto;
 	private UUID idClienteComercial;
-	//private String nomeCliente;
 	private String documento;
 	private String parcela;
 	private LocalDate dataVencimento;
@@ -39,7 +38,6 @@ public class BoletoClienteListVencidosResponse {
 	public BoletoClienteListVencidosResponse(Boleto boleto) {
 		this.idBoleto = boleto.getIdBoleto();
 		this.idClienteComercial = boleto.getIdClienteComercial();
-		//this.nomeCliente = boleto.getNomeCliente();
 		this.documento = boleto.getDocumento();
 		this.parcela = boleto.getParcela();
 		this.dataVencimento = boleto.getDataVencimento();
