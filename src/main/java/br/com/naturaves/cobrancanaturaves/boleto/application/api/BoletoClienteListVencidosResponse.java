@@ -25,7 +25,7 @@ public class BoletoClienteListVencidosResponse {
 
 	public static List<BoletoClienteListVencidosResponse> converte(List<Boleto> boletoVencido) {
 		List<Boleto> boletosFiltrados = boletoVencido.stream().filter(boleto -> {
-			boolean igualMaiorQueDoisDias = boleto.getDataVencimento().plusDays(2).isAfter(LocalDate.now())
+			boolean igualMaiorQueDoisDias = boleto.getDataVencimento().plusDays(2).isBefore(LocalDate.now())
 					|| boleto.getDataVencimento().plusDays(2).isEqual(LocalDate.now());
 
 			return igualMaiorQueDoisDias;
