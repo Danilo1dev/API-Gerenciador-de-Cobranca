@@ -1,5 +1,6 @@
 package br.com.naturaves.cobrancanaturaves.cobranca.application.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 import javax.validation.Valid;
@@ -67,5 +68,14 @@ public class CobrancaApplicationService implements CobrancaService {
         cobranca.altera(cobrancaAlteracaoRequest);
         cobrancaRepository.salvaCobranca(cobranca);
         log.info("[finaliza] CobrancaApplicationService - alteraCobrancaDoBoletoComId");
+    }
+
+    @Override
+    public List<CobrancaDetalhadoResponse> buscaCobrancasPorDataDeRetorno(UUID idBoleto,LocalDate dataDeRetorno) {
+        log.info("[inicia] CobrancaApplicationService - buscaCobrancasPorDataDeRetorno");
+        boletoService.buscaBoletoComIdBoleto(idBoleto);
+
+        log.info("[finaliza] CobrancaApplicationService - buscaCobrancasPorDataDeRetorno");
+        return null;
     }
 }

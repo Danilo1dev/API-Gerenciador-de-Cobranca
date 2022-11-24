@@ -61,9 +61,11 @@ public class CobrancaController implements CobrancaAPI {
 	}
 
 	@Override
-	public List<CobrancaDetalhadoResponse> buscaCobrancasPorDataDeRetorno(LocalDate dataDeRetorno) {
+	public List<CobrancaDetalhadoResponse> buscaCobrancasPorDataDeRetorno(UUID idBoleto,LocalDate dataDeRetorno) {
 		log.info("[inicia] CobrancaController - buscaCobrancaPorDataDeRetorno");
+		log.info("[idBoleto]{} - [dataDeRetorno]{}", idBoleto, dataDeRetorno);
+		List<CobrancaDetalhadoResponse> listaCobranca = cobrancaService.buscaCobrancasPorDataDeRetorno(idBoleto,dataDeRetorno);
 		log.info("[finaliza] CobrancaController - buscaCobrancaPorDataDeRetorno");
-		return null;
+		return listaCobranca;
 	}
 }

@@ -1,5 +1,6 @@
 package br.com.naturaves.cobrancanaturaves.cobranca.application.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 import javax.validation.Valid;
@@ -15,4 +16,5 @@ public interface CobrancaService {
     CobrancaDetalhadoResponse buscaCobrancaDoBoletoComId(UUID idBoleto, UUID idCobranca);
     void deletaCobrancaDoBoletoComId(UUID idBoleto, UUID idCobranca);
     void alteraCobrancaDoBoletoComId(UUID idBoleto, UUID idCobranca, CobrancaAlteracaoRequest cobrancaAlteracaoRequest);
+    List<CobrancaDetalhadoResponse> buscaCobrancasPorDataDeRetorno(UUID idBoleto, LocalDate dataDeRetorno);
 }

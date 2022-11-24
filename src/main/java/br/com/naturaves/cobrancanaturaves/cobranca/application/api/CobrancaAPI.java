@@ -38,6 +38,7 @@ public interface CobrancaAPI {
 	@GetMapping(value = "/findByDate" )
 	@ResponseStatus(code = HttpStatus.OK)
 	List<CobrancaDetalhadoResponse> buscaCobrancasPorDataDeRetorno(
+									@PathVariable UUID idBoleto,
 									@RequestParam(value = "dataDeRetorno")
 									@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataDeRetorno);
 }
