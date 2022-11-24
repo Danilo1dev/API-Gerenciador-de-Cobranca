@@ -1,12 +1,14 @@
 package br.com.naturaves.cobrancanaturaves.cobranca.application.api;
 
-import java.util.List;
-import java.util.UUID;
-import javax.validation.Valid;
-import org.springframework.web.bind.annotation.RestController;
 import br.com.naturaves.cobrancanaturaves.cobranca.application.service.CobrancaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @Log4j2
@@ -56,5 +58,12 @@ public class CobrancaController implements CobrancaAPI {
 		log.info("[idBoleto]{} - [idCobranca]{}", idBoleto, idCobranca);
 		cobrancaService.alteraCobrancaDoBoletoComId(idBoleto,idCobranca, cobrancaAlteracaoRequest);
 		log.info("[finaliza] CobrancaController - patchCobranca");
+	}
+
+	@Override
+	public List<CobrancaDetalhadoResponse> buscaCobrancasPorDataDeRetorno(LocalDate dataDeRetorno) {
+		log.info("[inicia] CobrancaController - buscaCobrancaPorDataDeRetorno");
+		log.info("[finaliza] CobrancaController - buscaCobrancaPorDataDeRetorno");
+		return null;
 	}
 }
