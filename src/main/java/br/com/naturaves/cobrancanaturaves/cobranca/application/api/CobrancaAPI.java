@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/v1/boleto/{idBoleto}/cobranca")
+@RequestMapping("/v1/cobranca")
 public interface CobrancaAPI {
 	
-	@PostMapping
+	@PostMapping(value = "/{idBoleto}/idBoleto")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	CobrancaResponse postCobranca(@PathVariable UUID idBoleto, 
 			@Valid @RequestBody CobrancaRequest cobrancaRequest);
@@ -37,8 +37,7 @@ public interface CobrancaAPI {
 
 	@GetMapping(value = "/findByDate" )
 	@ResponseStatus(code = HttpStatus.OK)
-	List<CobrancaDetalhadoResponse> buscaCobrancasPorDataDeRetorno(
-									@PathVariable UUID idBoleto,
+	List<CobrancaPorDateListResponse> buscaCobrancasPorDataDeRetorno(
 									@RequestParam(value = "dataDeRetorno")
 									@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataDeRetorno);
 }

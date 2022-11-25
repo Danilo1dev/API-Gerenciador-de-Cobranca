@@ -4,11 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 import javax.validation.Valid;
-import br.com.naturaves.cobrancanaturaves.cobranca.application.api.CobrancaAlteracaoRequest;
-import br.com.naturaves.cobrancanaturaves.cobranca.application.api.CobrancaBoletoListResponse;
-import br.com.naturaves.cobrancanaturaves.cobranca.application.api.CobrancaDetalhadoResponse;
-import br.com.naturaves.cobrancanaturaves.cobranca.application.api.CobrancaRequest;
-import br.com.naturaves.cobrancanaturaves.cobranca.application.api.CobrancaResponse;
+
+import br.com.naturaves.cobrancanaturaves.cobranca.application.api.*;
 
 public interface CobrancaService {
     CobrancaResponse criaCobranca(UUID idBoleto, @Valid CobrancaRequest cobrancaRequest);
@@ -16,5 +13,5 @@ public interface CobrancaService {
     CobrancaDetalhadoResponse buscaCobrancaDoBoletoComId(UUID idBoleto, UUID idCobranca);
     void deletaCobrancaDoBoletoComId(UUID idBoleto, UUID idCobranca);
     void alteraCobrancaDoBoletoComId(UUID idBoleto, UUID idCobranca, CobrancaAlteracaoRequest cobrancaAlteracaoRequest);
-    List<CobrancaDetalhadoResponse> buscaCobrancasPorDataDeRetorno(UUID idBoleto, LocalDate dataDeRetorno);
+    List<CobrancaPorDateListResponse> buscaCobrancasPorDataDeRetorno(LocalDate dataDeRetorno);
 }

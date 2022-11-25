@@ -1,5 +1,6 @@
 package br.com.naturaves.cobrancanaturaves.cobranca.infra;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.http.HttpStatus;
@@ -46,5 +47,13 @@ public class CobrancaInfraRepository implements CobrancaRepository {
 		log.info("[inicia] CobrancaInfraRepository - deletaCobranca");
 		cobrancaSpringDataJPARepository.delete(cobranca);
 		log.info("[finaliza] CobrancaInfraRepository - deletaCobranca");
+	}
+
+	@Override
+	public List<Cobranca> buscaCobrancas(LocalDate dataDeRetorno) {
+		log.info("[inicia] CobrancaInfraRepository - buscaCobrancas");
+		List<Cobranca> cobracas = cobrancaSpringDataJPARepository.findCobrancaBydataDeRetornoEquals(dataDeRetorno);
+		log.info("[finaliza] CobrancaInfraRepository - buscaCobrancas");
+		return cobracas;
 	}
 }
