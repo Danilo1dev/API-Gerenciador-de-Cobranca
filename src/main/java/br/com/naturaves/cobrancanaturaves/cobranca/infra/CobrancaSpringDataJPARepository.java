@@ -7,4 +7,5 @@ import br.com.naturaves.cobrancanaturaves.cobranca.domain.Cobranca;
 
 public interface CobrancaSpringDataJPARepository extends JpaRepository<Cobranca, UUID>{
 	List<Cobranca> findByIdBoleto(UUID idBoleto);
+	find
 }
