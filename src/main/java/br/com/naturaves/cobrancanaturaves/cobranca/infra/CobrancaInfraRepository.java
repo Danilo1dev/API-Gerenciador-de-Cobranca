@@ -31,13 +31,13 @@ public class CobrancaInfraRepository implements CobrancaRepository {
 		log.info("[finaliza] CobrancaInfraRepository - buscaCobrancaDoBoletoComId");
 		return cobranca;
 	}
-	
+
 	@Override
 	public List<Cobranca> buscaCobrancaDoCliente(UUID idCliente) {
 		log.info("[inicia] CobrancaInfraRepository - buscaCobrancaDoCliente");
-		List<Cobranca> cobranca = cobrancaSpringDataJPARepository;
+		List<Cobranca> cobranca = cobrancaSpringDataJPARepository.findByIdClienteBoleto(idCliente);
 		log.info("[finaliza] CobrancaInfraRepository - buscaCobrancaDoCliente");
-		return null;
+		return cobranca;
 	}
 
 	@Override
