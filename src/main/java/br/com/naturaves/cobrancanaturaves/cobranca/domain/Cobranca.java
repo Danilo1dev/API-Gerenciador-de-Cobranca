@@ -31,7 +31,7 @@ public class Cobranca {
 	private UUID idBoleto;
 	@NotNull
 	@Column(columnDefinition = "uuid", name = "idClienteBoleto", nullable = false)
-	private UUID idClienteBoleto;
+	private UUID idClienteCobranca;
 	@NotNull
 	private Double valorNegociado;
 	@NotNull

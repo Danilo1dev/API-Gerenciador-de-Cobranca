@@ -35,7 +35,7 @@ public class CobrancaInfraRepository implements CobrancaRepository {
 	@Override
 	public List<Cobranca> buscaCobrancaDoCliente(UUID idCliente) {
 		log.info("[inicia] CobrancaInfraRepository - buscaCobrancaDoCliente");
-		List<Cobranca> cobranca = cobrancaSpringDataJPARepository.findByIdClienteBoleto(idCliente);
+		List<Cobranca> cobranca = cobrancaSpringDataJPARepository.findByIdClienteCobranca(idCliente);
 		log.info("[finaliza] CobrancaInfraRepository - buscaCobrancaDoCliente");
 		return cobranca;
 	}
