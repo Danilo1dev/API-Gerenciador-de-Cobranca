@@ -15,7 +15,7 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 public class CobrancaInfraRepository implements CobrancaRepository {
 	private final CobrancaSpringDataJPARepository cobrancaSpringDataJPARepository;
-	
+
 	@Override
 	public Cobranca salvaCobranca(Cobranca cobranca) {
 		log.info("[inicia] CobrancaInfraRepository - salvaCobranca");
@@ -31,12 +31,19 @@ public class CobrancaInfraRepository implements CobrancaRepository {
 		log.info("[finaliza] CobrancaInfraRepository - buscaCobrancaDoBoletoComId");
 		return cobranca;
 	}
+	
+	@Override
+	public List<Cobranca> buscaCobrancaDoCliente(UUID idCliente) {
+		log.info("[inicia] CobrancaInfraRepository - buscaCobrancaDoCliente");
+		log.info("[finaliza] CobrancaInfraRepository - buscaCobrancaDoCliente");
+		return null;
+	}
 
 	@Override
 	public Cobranca buscaCobrancaComId(UUID idCobranca) {
 		log.info("[inicia] CobrancaInfraRepository - buscaCobrancaComId");
-		var cobranca = cobrancaSpringDataJPARepository.findById(idCobranca)
-				.orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND,"Cobranca não encontrada para o IdCobranca = " + idCobranca));
+		var cobranca = cobrancaSpringDataJPARepository.findById(idCobranca).orElseThrow(() -> APIException
+				.build(HttpStatus.NOT_FOUND, "Cobranca não encontrada para o IdCobranca = " + idCobranca));
 		log.info("[finaliza] CobrancaInfraRepository - buscaCobrancaComId");
 		return cobranca;
 	}
@@ -47,4 +54,5 @@ public class CobrancaInfraRepository implements CobrancaRepository {
 		cobrancaSpringDataJPARepository.delete(cobranca);
 		log.info("[finaliza] CobrancaInfraRepository - deletaCobranca");
 	}
+
 }

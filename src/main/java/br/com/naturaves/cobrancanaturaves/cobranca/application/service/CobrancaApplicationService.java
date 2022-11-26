@@ -49,10 +49,10 @@ public class CobrancaApplicationService implements CobrancaService {
 
 	@Override
 	public List<CobrancaTituloListResponse> buscaCobrancaDoCliente(UUID idCliente) {
-		log.info("[inicia] CobrancaController - buscaCobrancaDoCliente");
+		log.info("[inicia] CobrancaApplicationService - buscaCobrancaDoCliente");
 		clienteService.buscaClienteAtravesID(idCliente);
 		List<Cobranca> cobrancaTitulo = cobrancaRepository.buscaCobrancaDoCliente(idCliente);
-		log.info("[inicia] CobrancaController - buscaCobrancaDoCliente");		
+		log.info("[finaliza] CobrancaApplicationService - buscaCobrancaDoCliente");		
 		return CobrancaTituloListResponse.converte(cobrancaTitulo);
 	}
 
