@@ -2,8 +2,11 @@ package br.com.naturaves.cobrancanaturaves.cobranca.application.api;
 
 import java.util.List;
 import java.util.UUID;
+
 import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.RestController;
+
 import br.com.naturaves.cobrancanaturaves.cobranca.application.service.CobrancaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -36,11 +39,9 @@ public class CobrancaController implements CobrancaAPI {
 	public List<CobrancaTituloListResponse> getTitulosCobranca(UUID idCliente) {
 		log.info("[inicia] CobrancaController - getTitulosCobranca");
 		log.info("[idCliente]{}", idCliente);
-		// List<CobrancaTitulosListResponse> cobrancaTitulo =
-		// cobrancaService.buscaTituloCobranca(idCliente);
+		List<CobrancaTituloListResponse> cobranca = cobrancaService.buscaCobrancaDoCliente(idCliente);
 		log.info("[inicia] CobrancaController - getTitulosCobranca");
-
-		return null;
+		return cobranca;
 	}
 
 	@Override

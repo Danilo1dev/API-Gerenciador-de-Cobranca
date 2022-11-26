@@ -6,7 +6,12 @@ import br.com.naturaves.cobrancanaturaves.cobranca.domain.Cobranca;
 
 public interface CobrancaRepository {
 	Cobranca salvaCobranca(Cobranca cobranca);
+
 	List<Cobranca> buscaCobrancaDoBoletoComId(UUID idBoleto);
+
+	List<Cobranca> buscaCobrancaDoCliente(UUID idCliente);
+
 	Cobranca buscaCobrancaComId(UUID idCobranca);
+
 	void deletaCobranca(Cobranca cobranca);
 }

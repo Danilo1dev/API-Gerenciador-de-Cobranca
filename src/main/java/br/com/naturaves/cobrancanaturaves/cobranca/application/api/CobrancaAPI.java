@@ -26,7 +26,7 @@ public interface CobrancaAPI {
 	@ResponseStatus(code = HttpStatus.OK)
 	List<CobrancaBoletoListResponse> getCobrancaDoBoletoComId(@PathVariable UUID idBoleto);
 
-	@GetMapping(value = "/{idCliente}/cobranca")
+	@GetMapping(value = "/{idCliente}/buscaCobranca")
 	@ResponseStatus(code = HttpStatus.OK)
 	List<CobrancaTituloListResponse> getTitulosCobranca(@PathVariable UUID idCliente);
 
