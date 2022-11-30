@@ -10,34 +10,31 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/v1/cobranca")
+@RequestMapping("/v1/boleto/{idBoleto}/cobranca")
 public interface CobrancaAPI {
 	
-	@PostMapping(value = "/{idBoleto}/idBoleto")
+	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
 	CobrancaResponse postCobranca(@PathVariable UUID idBoleto, 
-			@Valid @RequestBody CobrancaRequest cobrancaRequest);
+								  @Valid @RequestBody CobrancaRequest cobrancaRequest);
 	
-	@GetMapping
+	@GetMapping(value = "/boleto/{idBoleto}")
 	@ResponseStatus(code = HttpStatus.OK)
 	List<CobrancaBoletoListResponse> getCobrancaDoBoletoComId(@PathVariable UUID idBoleto);
 	
-	@GetMapping(value = "/{idCobranca}")
+	@GetMapping(value = "{idCobranca}/boleto/{idBoleto}")
 	@ResponseStatus(code = HttpStatus.OK)
-	CobrancaDetalhadoResponse getCobrancaAtravesId(@PathVariable UUID idBoleto, @PathVariable UUID idCobranca);
+	CobrancaDetalhadoResponse getCobrancaAtravesId(@PathVariable UUID idBoleto,
+												   @PathVariable UUID idCobranca);
 	
-	@DeleteMapping(value = "/{idCobranca}")
+	@DeleteMapping(value = "/{idCobranca}/boleto/{idBoleto}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	void deletaCobrancaDoBoletoComId(@PathVariable UUID idBoleto, @PathVariable UUID idCobranca);
+	void deletaCobrancaDoBoletoComId(@PathVariable UUID idBoleto,
+									 @PathVariable UUID idCobranca);
 	
-	@PatchMapping(value = "/{idCobranca}")
+	@PatchMapping(value = "/{idCobranca}/boleto/{idBoleto}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	void patchCobranca(@PathVariable UUID idBoleto,@PathVariable UUID idCobranca,
-			@Valid @RequestBody CobrancaAlteracaoRequest cobrancaAlteracaoRequest);
-
-	@GetMapping(value = "/findByDate" )
-	@ResponseStatus(code = HttpStatus.OK)
-	List<CobrancaPorDateListResponse> buscaCobrancasPorDataDeRetorno(
-									@RequestParam(value = "dataDeRetorno")
-									@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataDeRetorno);
+	void patchCobranca(@PathVariable UUID idBoleto,
+					   @PathVariable UUID idCobranca,
+					   @Valid @RequestBody CobrancaAlteracaoRequest cobrancaAlteracaoRequest);
 }
