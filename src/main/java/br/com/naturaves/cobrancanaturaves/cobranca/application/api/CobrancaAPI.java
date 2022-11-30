@@ -12,31 +12,32 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/v1/cobranca")
 public interface CobrancaAPI {
-	
-	@PostMapping
+
+	@PostMapping(value = "boleto/{idBoleto}")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	CobrancaResponse postCobranca(@PathVariable UUID idBoleto, 
+	CobrancaResponse postCobranca(@PathVariable UUID idBoleto,
 								  @Valid @RequestBody CobrancaRequest cobrancaRequest);
-	
+
 	@GetMapping(value = "/boleto/{idBoleto}")
 	@ResponseStatus(code = HttpStatus.OK)
 	List<CobrancaBoletoListResponse> getCobrancaDoBoletoComId(@PathVariable UUID idBoleto);
-	
+
 	@GetMapping(value = "{idCobranca}/boleto/{idBoleto}")
 	@ResponseStatus(code = HttpStatus.OK)
 	CobrancaDetalhadoResponse getCobrancaAtravesId(@PathVariable UUID idBoleto,
 												   @PathVariable UUID idCobranca);
-	
+
 	@DeleteMapping(value = "/{idCobranca}/boleto/{idBoleto}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	void deletaCobrancaDoBoletoComId(@PathVariable UUID idBoleto,
 									 @PathVariable UUID idCobranca);
-	
+
 	@PatchMapping(value = "/{idCobranca}/boleto/{idBoleto}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	void patchCobranca(@PathVariable UUID idBoleto,
 					   @PathVariable UUID idCobranca,
 					   @Valid @RequestBody CobrancaAlteracaoRequest cobrancaAlteracaoRequest);
+
 
 	@GetMapping(value = "/findByDate" )
 	@ResponseStatus(code = HttpStatus.OK)
