@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/v1/boleto/{idBoleto}/cobranca")
+@RequestMapping("/v1/cobranca")
 public interface CobrancaAPI {
 	
 	@PostMapping
@@ -37,4 +37,10 @@ public interface CobrancaAPI {
 	void patchCobranca(@PathVariable UUID idBoleto,
 					   @PathVariable UUID idCobranca,
 					   @Valid @RequestBody CobrancaAlteracaoRequest cobrancaAlteracaoRequest);
+
+	@GetMapping(value = "/findByDate" )
+	@ResponseStatus(code = HttpStatus.OK)
+	List<CobrancaPorDateListResponse> buscaCobrancasPorDataDeRetorno(
+			@RequestParam(value = "dataDeRetorno")
+			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataDeRetorno);
 }
