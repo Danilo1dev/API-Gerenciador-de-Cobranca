@@ -72,7 +72,6 @@ public class CobrancaApplicationService implements CobrancaService {
     @Override
     public List<CobrancaPorDateListResponse> buscaCobrancasPorDataDeRetorno(LocalDate dataDeRetorno) {
         log.info("[inicia] CobrancaApplicationService - buscaCobrancasPorDataDeRetorno");
-        //boletoService.buscaBoletoComIdBoleto(idBoleto);
         List<Cobranca> cobrancas = cobrancaRepository.buscaCobrancas(dataDeRetorno);
         log.info("[finaliza] CobrancaApplicationService - buscaCobrancasPorDataDeRetorno");
         return CobrancaPorDateListResponse.converte(cobrancas);
