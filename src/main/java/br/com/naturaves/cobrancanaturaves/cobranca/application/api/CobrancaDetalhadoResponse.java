@@ -1,7 +1,10 @@
 package br.com.naturaves.cobrancanaturaves.cobranca.application.api;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 import br.com.naturaves.cobrancanaturaves.cobranca.domain.Cobranca;
 import lombok.Value;
 
@@ -20,5 +23,5 @@ public class CobrancaDetalhadoResponse {
 		this.valorNegociado = cobranca.getValorNegociado();
 		this.anotacao = cobranca.getAnotacao();
 		this.dataDeRetorno = cobranca.getDataDeRetorno();
-	}	
+	}
 }
