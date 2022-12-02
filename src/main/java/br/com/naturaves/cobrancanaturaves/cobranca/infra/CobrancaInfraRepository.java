@@ -16,7 +16,7 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 public class CobrancaInfraRepository implements CobrancaRepository {
 	private final CobrancaSpringDataJPARepository cobrancaSpringDataJPARepository;
-	
+
 	@Override
 	public Cobranca salvaCobranca(Cobranca cobranca) {
 		log.info("[inicia] CobrancaInfraRepository - salvaCobranca");
@@ -36,8 +36,8 @@ public class CobrancaInfraRepository implements CobrancaRepository {
 	@Override
 	public Cobranca buscaCobrancaComId(UUID idCobranca) {
 		log.info("[inicia] CobrancaInfraRepository - buscaCobrancaComId");
-		var cobranca = cobrancaSpringDataJPARepository.findById(idCobranca)
-				.orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND,"Cobranca não encontrada para o IdCobranca = " + idCobranca));
+		var cobranca = cobrancaSpringDataJPARepository.findById(idCobranca).orElseThrow(() -> APIException
+				.build(HttpStatus.NOT_FOUND, "Cobranca não encontrada para o IdCobranca = " + idCobranca));
 		log.info("[finaliza] CobrancaInfraRepository - buscaCobrancaComId");
 		return cobranca;
 	}
@@ -55,5 +55,14 @@ public class CobrancaInfraRepository implements CobrancaRepository {
 		List<Cobranca> cobracas = cobrancaSpringDataJPARepository.findCobrancaBydataDeRetornoEquals(dataDeRetorno);
 		log.info("[finaliza] CobrancaInfraRepository - buscaCobrancas");
 		return cobracas;
+	}
+
+	@Override
+	public Cobranca buscaCobrancasDoCliente(UUID idCobranca) {
+		log.info("[inicia] CobrancaInfraRepository - buscaCobrancasDoCliente");
+		Cobranca cobranca = cobrancaSpringDataJPARepository.findById(idCobranca)
+				.orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Id Cobranca nao encontrado"));
+		log.info("[finaliza] CobrancaInfraRepository - buscaCobrancasDoCliente");
+		return cobranca;
 	}
 }
