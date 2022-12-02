@@ -1,6 +1,7 @@
 package br.com.naturaves.cobrancanaturaves.boleto.application.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,15 @@ public class TituloApplicationService implements TituloService {
 		List<Boleto> boletoVencido = tituloRepository.buscaBoletoVencido(nomeVendedor);
 		log.info("[finaliza] TituloApplicationService - buscaBoletosVencidosPorNome");
 		return BoletoClienteListVencidosResponse.converte(boletoVencido);
+	}
+
+	@Override
+	public void quitarTitulo(UUID idTitulo) {
+		log.info("[inicia] TituloApplicationService - quitarTitulo");
+		var boleto = tituloRepository.buscaBoleto(idTitulo);
+		boleto.quitar();
+		this.tituloRepository.salvar(boleto);
+		log.info("[Fim] TituloApplicationService - quitarTitulo");
 	}
 
 }

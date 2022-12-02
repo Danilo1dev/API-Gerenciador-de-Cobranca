@@ -48,6 +48,9 @@ public class Boleto {
 	@Enumerated(EnumType.STRING)
 	private GrupoEmpresarial grupoEmpresarial;
 
+	@Enumerated(EnumType.STRING)
+	private StatusTitulo status;
+
 	private LocalDateTime dataHoraDaCadastro;
 	private LocalDateTime dataHoraDoUltimaAlteracao;
 
@@ -59,6 +62,7 @@ public class Boleto {
 		this.saldoDevedor = boletoRequest.getSaldoDevedor();
 		this.grupoEmpresarial = boletoRequest.getGrupoEmpresarial();
 		this.dataHoraDaCadastro = LocalDateTime.now();
+		this.status = StatusTitulo.PENDENTE;
 	}
 
 	public void altera(BoletoAlteracaoRequest boletoRequest) {
@@ -68,6 +72,10 @@ public class Boleto {
 		this.saldoDevedor = boletoRequest.getSaldoDevedor();
 		this.grupoEmpresarial = boletoRequest.getGrupoEmpresarial();
 		this.dataHoraDoUltimaAlteracao = LocalDateTime.now();
+	}
+
+	public void quitar() {
+		this.status = StatusTitulo.PAGO;
 	}
 
 }
