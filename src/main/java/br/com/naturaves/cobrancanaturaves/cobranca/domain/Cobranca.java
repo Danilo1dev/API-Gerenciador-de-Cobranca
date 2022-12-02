@@ -37,6 +37,8 @@ public class Cobranca {
 	@NotBlank(message = "Insira uma descrição")
 	@Size(max = 200)
 	private String anotacao;
+	@Column
+	private UUID idCliente;
 
 	private LocalDate dataDeRetorno;
 	private LocalDateTime dataDaCobranca;
