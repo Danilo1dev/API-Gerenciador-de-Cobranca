@@ -53,7 +53,7 @@ public class ExtrairBoletosAtravesCsvApplicationService implements ExtrairBoleto
 
     private List<Boleto> lerPlanilhaCsv(BufferedReader br) {
         try {
-            String line = "";
+            String line;
             List<Boleto> boletos = new ArrayList<>();
             GrupoEmpresarial grupoEmpresarial = null;
 
@@ -75,7 +75,10 @@ public class ExtrairBoletosAtravesCsvApplicationService implements ExtrairBoleto
                     if (dataLine.length >= 15 && !hasEmptySpace && !hasInvalidTexts) {
                         UUID idCliente = this.extrairIdClienteDaLinha(dataLine);
                         BoletoRequest boletoRequest = this.extrairBoletoRequestDaLinha(dataLine, grupoEmpresarial);
-                        boletos.add(new Boleto(idCliente, boletoRequest));
+
+                        if (boletoRequest != null) {
+                            boletos.add(new Boleto(idCliente, boletoRequest));
+                        }
                     }
                 }
             }
@@ -103,7 +106,14 @@ public class ExtrairBoletosAtravesCsvApplicationService implements ExtrairBoleto
     }
 
     private BoletoRequest extrairBoletoRequestDaLinha(String[] dataLine, GrupoEmpresarial grupoEmpresarial) {
-        String document = dataLine[5];
+        String blo = "BLO";
+        String dup = "DUP";
+
+        if (dataLine[5].toUpperCase(Locale.ROOT).contains(dup)) {
+            return null;
+        }
+
+        String document = dataLine[5].replace(blo + " ", "");
         String installments = dataLine[5].substring(dataLine[5].length() - 1);
         LocalDate dueDate = DateTimeFormatter.ofPattern("dd/MM/yy").parse(dataLine[10], LocalDate::from);
         BigDecimal debitBalance =
