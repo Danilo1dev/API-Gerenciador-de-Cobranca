@@ -37,7 +37,6 @@ public class CobrancaApplicationService implements CobrancaService {
 	@Override
 	public CobrancaResponse criaCobranca(UUID idBoleto, @Valid CobrancaRequest cobrancaRequest) {
 		log.info("[inicia] CobrancaApplicationService - criaCobranca");
-		// boletoService.buscaBoletoComIdBoleto(idBoleto);
 		Cobranca novaCobranca = new Cobranca(idBoleto, cobrancaRequest);
 		Cobranca cobranca = cobrancaRepository.salvaCobranca(novaCobranca);
 		log.info("[finaliza] CobrancaApplicationService - criaCobranca");
@@ -97,6 +96,7 @@ public class CobrancaApplicationService implements CobrancaService {
 		CobrancaDetalhadoResponse cobrancas = buscaCobrancaDoBoletoComId(idBoleto, idCobranca);
 		Boleto boleto = boletoRepository.buscaBoletoPeloId(cobrancas.getIdBoleto());
 		Cliente cliente = clienteRepository.buscaClienteAtravesId(boleto.getIdClienteComercial());
+		clienteRepository.buscaClienteAtravesId(idCliente);
 		Cobranca cobranca = cobrancaRepository.buscaCobrancasDoCliente(idCobranca);
 		log.info("[finaliza] CobrancaApplicationService - buscaTodasCobrancasDoCliente");
 		CobrancaAndClienteDetalhadoResponse cobrancaDetalhada = new CobrancaAndClienteDetalhadoResponse(cobranca,
