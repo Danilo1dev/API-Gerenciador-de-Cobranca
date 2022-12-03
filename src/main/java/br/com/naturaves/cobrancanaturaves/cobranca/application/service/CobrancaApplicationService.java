@@ -94,9 +94,10 @@ public class CobrancaApplicationService implements CobrancaService {
 	public CobrancaAndClienteDetalhadoResponse buscaTodasCobrancasDoCliente(UUID idCliente, UUID idBoleto,
 			UUID idCobranca) {
 		log.info("[inicia] CobrancaApplicationService - buscaTodasCobrancasDoCliente");
-		Cobranca cobranca = cobrancaRepository.buscaCobrancasDoCliente(idCobranca);
-		Boleto boleto = boletoRepository.buscaBoletoPeloId(cobranca.getIdBoleto());
+		CobrancaDetalhadoResponse cobrancas = buscaCobrancaDoBoletoComId(idBoleto, idCobranca);
+		Boleto boleto = boletoRepository.buscaBoletoPeloId(cobrancas.getIdBoleto());
 		Cliente cliente = clienteRepository.buscaClienteAtravesId(boleto.getIdClienteComercial());
+		Cobranca cobranca = cobrancaRepository.buscaCobrancasDoCliente(idCobranca);
 		log.info("[finaliza] CobrancaApplicationService - buscaTodasCobrancasDoCliente");
 		CobrancaAndClienteDetalhadoResponse cobrancaDetalhada = new CobrancaAndClienteDetalhadoResponse(cobranca,
 				boleto, cliente);

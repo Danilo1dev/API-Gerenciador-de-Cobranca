@@ -74,6 +74,7 @@ public class CobrancaController implements CobrancaAPI {
 	@Override
 	public CobrancaAndClienteDetalhadoResponse buscaCobrancaDetalhada(UUID idCliente, UUID idBoleto, UUID idCobranca) {
 		log.info("[inicia] CobrancaController - buscaCobrancaDetalhada");
+		log.info("[idCliente]{} - [idBoleto]{} - [idCobranca]{}", idCliente, idBoleto, idCobranca);
 		CobrancaAndClienteDetalhadoResponse cobranca = cobrancaService.buscaTodasCobrancasDoCliente(idCliente, idBoleto,
 				idCobranca);
 		log.info("[inicia] CobrancaController - buscaCobrancaDetalhada");
