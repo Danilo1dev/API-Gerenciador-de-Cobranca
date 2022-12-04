@@ -25,8 +25,7 @@ public interface CobrancaAPI {
 
 	@PostMapping(value = "boleto/{idBoleto}")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	CobrancaResponse postCobranca(@PathVariable UUID idBoleto,
-								  @Valid @RequestBody CobrancaRequest cobrancaRequest);
+	CobrancaResponse postCobranca(@PathVariable UUID idBoleto, @Valid @RequestBody CobrancaRequest cobrancaRequest);
 
 	@GetMapping(value = "/boleto/{idBoleto}")
 	@ResponseStatus(code = HttpStatus.OK)
@@ -34,29 +33,24 @@ public interface CobrancaAPI {
 
 	@GetMapping(value = "{idCobranca}/boleto/{idBoleto}")
 	@ResponseStatus(code = HttpStatus.OK)
-	CobrancaDetalhadoResponse getCobrancaAtravesId(@PathVariable UUID idBoleto,
-												   @PathVariable UUID idCobranca);
-	
-	@GetMapping(value = "{idCliente}/cobranca/{idBoleto}cobranca/{idCobranca}")
+	CobrancaDetalhadoResponse getCobrancaAtravesId(@PathVariable UUID idBoleto, @PathVariable UUID idCobranca);
+
+	@GetMapping(value = "{idCliente}/buscaCobranca")
 	@ResponseStatus(code = HttpStatus.OK)
 	CobrancaAndClienteDetalhadoResponse buscaCobrancaDetalhada(@PathVariable UUID idCliente,
-			@PathVariable UUID idBoleto,@PathVariable UUID idCobranca);
+			@RequestParam UUID idBoleto, @RequestParam UUID idCobranca);
 
 	@DeleteMapping(value = "/{idCobranca}/boleto/{idBoleto}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	void deletaCobrancaDoBoletoComId(@PathVariable UUID idBoleto,
-									 @PathVariable UUID idCobranca);
+	void deletaCobrancaDoBoletoComId(@PathVariable UUID idBoleto, @PathVariable UUID idCobranca);
 
 	@PatchMapping(value = "/{idCobranca}/boleto/{idBoleto}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	void patchCobranca(@PathVariable UUID idBoleto,
-					   @PathVariable UUID idCobranca,
-					   @Valid @RequestBody CobrancaAlteracaoRequest cobrancaAlteracaoRequest);
+	void patchCobranca(@PathVariable UUID idBoleto, @PathVariable UUID idCobranca,
+			@Valid @RequestBody CobrancaAlteracaoRequest cobrancaAlteracaoRequest);
 
-
-	@GetMapping(value = "/findByDate" )
+	@GetMapping(value = "/findByDate")
 	@ResponseStatus(code = HttpStatus.OK)
 	List<CobrancaPorDateListResponse> buscaCobrancasPorDataDeRetorno(
-			@RequestParam(value = "dataDeRetorno")
-			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataDeRetorno);
+			@RequestParam(value = "dataDeRetorno") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataDeRetorno);
 }
