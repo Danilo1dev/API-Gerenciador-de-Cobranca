@@ -39,12 +39,9 @@ public class Cobranca {
 	private String anotacao;
 	@Column
 	private UUID idCliente;
-
 	private LocalDate dataDeRetorno;
 	private LocalDateTime dataDaCobranca;
 	private LocalDateTime dataHoraDoUltimaAlteracao;
-	// private ClienteDTO cliente;
-	// private List<BoletoDTO> boleto = new ArrayList<>();
 
 	public Cobranca(UUID idBoleto, @Valid CobrancaRequest cobrancaRequest) {
 		this.idBoleto = idBoleto;
